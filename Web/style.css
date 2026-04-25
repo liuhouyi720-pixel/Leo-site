@@ -90,3 +90,29 @@ footer {
         padding: 0.5rem;
     }
 }
+
+/* Perspectives Page Styles */
+#featured-article .group:hover h1 {
+    color: #2563eb; /* blue-600 */
+}
+
+#article-grid .group:hover h3 {
+    color: #2563eb; /* blue-600 */
+}
+
+#nav-container nav {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 1rem;
+}
+
+#nav-container nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+#nav-container nav a:hover {
+    text-decoration: underline;
+}

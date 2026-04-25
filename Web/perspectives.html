@@ -1,114 +1,83 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Perspectives</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="notes/notes.css">
-    <style>
-        body {
-            background-color: #1a202c; /* Slate background */
-            color: #e2e8f0; /* Light text */
-        }
-    </style>
+    <title>观点 | Perspectives</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header>
-        <h1>My Perspectives</h1>
-    </header>
+<body class="bg-gray-100 text-gray-800">
 
-    <div class="max-w-7xl mx-auto px-4 py-8">
-        <!-- Sorting Controls -->
-        <div class="flex justify-end items-center mb-8">
-            <label for="sort-by" class="text-gray-400 mr-2">Sort by:</label>
-            <select id="sort-by" class="bg-gray-700 text-white rounded-md p-2">
-                <option value="date">Latest</option>
-                <option value="clicks">Popularity</option>
-            </select>
-        </div>
+    <div id="nav-container"></div>
 
-        <!-- Articles Container -->
-        <div id="perspectives-container" class="space-y-8"></div>
-    </div>
+    <main class="container mx-auto mt-8 p-4">
+        <section id="featured-article" class="mb-12"></section>
+        
+        <h2 class="text-3xl font-bold border-b-2 border-gray-300 pb-2 mb-6">Past Articles</h2>
+        <section id="article-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></section>
+    </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async function () {
-            const container = document.getElementById('perspectives-container');
-            const sortBySelect = document.getElementById('sort-by');
-            let articles = [];
-
-            // Function to get click counts from localStorage
-            function getClickCounts() {
-                const clicks = localStorage.getItem('article_clicks');
-                return clicks ? JSON.parse(clicks) : {};
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Load Navigation
+            try {
+                const navResponse = await fetch('nav.html');
+                const navHtml = await navResponse.text();
+                document.getElementById('nav-container').innerHTML = navHtml;
+            } catch (error) {
+                console.error('Failed to load navigation:', error);
             }
 
-            // Function to save click counts to localStorage
-            function saveClickCounts(clicks) {
-                localStorage.setItem('article_clicks', JSON.stringify(clicks));
-            }
-
-            // Function to render articles
-            function renderArticles(sortedArticles) {
-                const clickCounts = getClickCounts();
-                container.innerHTML = sortedArticles.map((item) => `
-                    <article class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col md:flex-row gap-4 md:items-center" data-id="${item.id}">
-                        <a href="article.html?id=${item.id}" class="flex-shrink-0 article-link">
-                            <img src="${item.imageUrl}" alt="${item.title}" class="w-full md:w-56 h-36 object-cover rounded-md" />
-                        </a>
-                        <div>
-                            <p class="text-sm text-gray-400">${item.date} &bull; ${clickCounts[item.id] || 0} views</p>
-                            <h3 class="text-2xl font-bold text-cyan-400 mt-1"><a href="article.html?id=${item.id}" class="article-link">${item.title}</a></h3>
-                            <p class="text-gray-300 mt-2">${item.summary}</p>
-                        </div>
-                    </article>
-                `).join('');
-            }
-
-            // Function to sort and render articles
-            function sortAndRender() {
-                const sortBy = sortBySelect.value;
-                const clickCounts = getClickCounts();
-                let sortedArticles = [...articles];
-
-                if (sortBy === 'date') {
-                    sortedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-                } else if (sortBy === 'clicks') {
-                    sortedArticles.sort((a, b) => (clickCounts[b.id] || 0) - (clickCounts[a.id] || 0));
-                }
-
-                renderArticles(sortedArticles);
-            }
-
-            // --- Initial Load ---
+            // Load Articles
             try {
                 const response = await fetch('perspectives/articles.json');
-                articles = await response.json();
-                sortAndRender(); // Initial render based on default sort (date)
-            } catch (error) {
-                console.error("Failed to load perspectives:", error);
-                container.innerHTML = '<p class="text-center text-red-500">Failed to load articles. Please check the console for details.</p>';
-            }
+                const articles = await response.json();
+                
+                // Sort articles by date to find the latest
+                articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                const [latestArticle, ...otherArticles] = articles;
 
-            // Event listener for sorting
-            sortBySelect.addEventListener('change', sortAndRender);
-
-            // Event listener for click tracking
-            container.addEventListener('click', function(e) {
-                const link = e.target.closest('.article-link');
-                if (link) {
-                    const articleElement = link.closest('article');
-                    const articleId = articleElement.dataset.id;
-                    if (articleId) {
-                        const clickCounts = getClickCounts();
-                        clickCounts[articleId] = (clickCounts[articleId] || 0) + 1;
-                        saveClickCounts(clickCounts);
-                    }
+                // Render Featured Article
+                const featuredContainer = document.getElementById('featured-article');
+                if (latestArticle) {
+                    featuredContainer.innerHTML = `
+                        <a href="article.html?id=${latestArticle.id}" class="block group">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <img src="${latestArticle.imageUrl}" alt="${latestArticle.title}" class="w-full h-auto object-cover rounded-lg shadow-lg">
+                                <div>
+                                    <p class="text-sm text-gray-500 mb-2">${new Date(latestArticle.date).toLocaleDateString()}</p>
+                                    <h1 class="text-4xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">${latestArticle.title}</h1>
+                                    <p class="text-gray-600 mt-4">${latestArticle.summary}</p>
+                                </div>
+                            </div>
+                        </a>
+                    `;
                 }
-            });
+
+                // Render Article Grid
+                const gridContainer = document.getElementById('article-grid');
+                if (otherArticles.length > 0) {
+                    gridContainer.innerHTML = otherArticles.map(article => `
+                        <a href="article.html?id=${article.id}" class="block group bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                            <img src="${article.imageUrl}" alt="${article.title}" class="w-full h-48 object-cover rounded-md mb-4">
+                            <p class="text-xs text-gray-500 mb-1">${new Date(article.date).toLocaleDateString()}</p>
+                            <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">${article.title}</h3>
+                            <p class="text-sm text-gray-600 mt-2">${article.summary}</p>
+                        </a>
+                    `).join('');
+                } else {
+                    gridContainer.innerHTML = '<p>No other articles found.</p>';
+                }
+
+            } catch (error) {
+                console.error("Failed to load articles:", error);
+                document.getElementById('article-grid').innerHTML = '<p class="text-red-500">Error loading articles.</p>';
+            }
         });
     </script>
+
 </body>
 </html>
