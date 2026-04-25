@@ -116,3 +116,14 @@ footer {
 #nav-container nav a:hover {
     text-decoration: underline;
 }
+
+/* Article Content Spacing */
+#article-content p {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+#article-content img {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
