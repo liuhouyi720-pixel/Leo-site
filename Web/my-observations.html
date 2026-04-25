@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Observations - Leo's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .nav-link {
+            position: relative;
+            color: #495057;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #007bff;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Global Sticky Navigation -->
+    <header class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-gray-800"><a href="index.html">Leo</a></div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="who-am-i.html" class="nav-link">Who Am I</a>
+                    <a href="my-experience.html" class="nav-link">My Experience</a>
+                    <a href="my-observations.html" class="nav-link active">My Observations</a>
+                    <a href="perspectives.html" class="nav-link">Perspectives</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main class="max-w-7xl mx-auto py-16 px-4">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8 text-center">My Observations</h1>
+        <div id="content-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Content will be loaded here -->
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                const response = await fetch('my-observations.json');
+                const data = await response.json();
+                renderContent(data);
+            } catch (error) {
+                console.error("Failed to load page content:", error);
+                document.getElementById('content-container').innerHTML = '<p class="text-red-500 text-center col-span-full">Error loading content.</p>';
+            }
+        });
+
+        function renderContent(data) {
+            const container = document.getElementById('content-container');
+            container.innerHTML = data.map(item => `
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="${item.imageUrl}" alt="${item.title}" class="rounded-md mb-4 w-full h-48 object-cover">
+                    <h3 class="text-xl font-bold text-blue-700">${item.title}</h3>
+                    <p class="text-gray-600 mt-2">${item.summary}</p>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>

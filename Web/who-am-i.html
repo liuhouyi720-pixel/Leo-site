@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Am I - Leo's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .nav-link {
+            position: relative;
+            color: #495057;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #007bff;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .prose {
+            color: #343a40;
+        }
+        .prose h2 {
+            color: #007bff;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Global Sticky Navigation -->
+    <header class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-gray-800"><a href="index.html">Leo</a></div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="who-am-i.html" class="nav-link active">Who Am I</a>
+                    <a href="my-experience.html" class="nav-link">My Experience</a>
+                    <a href="my-observations.html" class="nav-link">My Observations</a>
+                    <a href="perspectives.html" class="nav-link">Perspectives</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main id="content-container" class="max-w-4xl mx-auto py-16 px-4">
+        <!-- Content will be loaded here -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                const response = await fetch('who-am-i.json');
+                const data = await response.json();
+                renderContent(data);
+
+                const linkedinBtn = document.getElementById("linkedin-btn");
+                const handshakeBtn = document.getElementById("handshake-btn");
+                const resumeBtn = document.getElementById("resume-btn");
+
+                const linkedinModal = document.getElementById("linkedin-modal");
+                const handshakeModal = document.getElementById("handshake-modal");
+                const resumeModal = document.getElementById("resume-modal");
+
+                const closeBtns = document.querySelectorAll(".close");
+
+                linkedinBtn.onclick = function() {
+                    linkedinModal.style.display = "block";
+                    window.open("https://www.linkedin.com/in/houyi-liu-b46306291/", "_blank");
+                }
+
+                handshakeBtn.onclick = function() {
+                    handshakeModal.style.display = "block";
+                    window.open("https://app.joinhandshake.com/stu/users/52259692", "_blank");
+                }
+
+                resumeBtn.onclick = function() {
+                    resumeModal.style.display = "block";
+                    window.open("Resume Houyi LIU.pdf", "_blank");
+                }
+
+                closeBtns.forEach(btn => {
+                    btn.onclick = function() {
+                        linkedinModal.style.display = "none";
+                        handshakeModal.style.display = "none";
+                        resumeModal.style.display = "none";
+                    }
+                });
+
+                window.onclick = function(event) {
+                    if (event.target == linkedinModal) {
+                        linkedinModal.style.display = "none";
+                    }
+                    if (event.target == handshakeModal) {
+                        handshakeModal.style.display = "none";
+                    }
+                    if (event.target == resumeModal) {
+                        resumeModal.style.display = "none";
+                    }
+                }
+
+            } catch (error) {
+                console.error("Failed to load page content:", error);
+                document.getElementById('content-container').innerHTML = '<p class="text-center text-red-500">Error loading content.</p>';
+            }
+        });
+
+        function renderContent(data) {
+            const container = document.getElementById('content-container');
+            // Using more semantic and styled content blocks
+            container.innerHTML = `
+                <article>
+                    <header class="text-center mb-12">
+                        <h1 class="text-6xl font-bold mb-4">${data.title}</h1>
+                        <p class="text-xl text-gray-600">${data.introduction}</p>
+                    </header>
+                    <div class="prose max-w-none">
+                        ${data.sections.map(section => `
+                            <section class="mb-10">
+                                <h2 class="text-4xl font-bold mb-4 border-b border-gray-300 pb-2">${section.title}</h2>
+                                <p class="text-lg leading-relaxed">${section.content}</p>
+                            </section>
+                        `).join('')}
+                    </div>
+                    <div class="flex space-x-4 mt-6">
+                        <button id="linkedin-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">LinkedIn</button>
+                        <button id="handshake-btn" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Handshake</button>
+                        <button id="resume-btn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Resume</button>
+                    </div>
+                </article>
+
+                <div id="linkedin-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Redirecting to LinkedIn...</p>
+                    </div>
+                </div>
+
+                <div id="handshake-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Redirecting to Handshake...</p>
+                    </div>
+                </div>
+
+                <div id="resume-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Downloading Resume...</p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+![Silicon Valley Fire](perspectives/images/silicon-valley-fire-3.jpg)
