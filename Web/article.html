@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - Leo's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <link rel="stylesheet" href="notes/notes.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .nav-link {
+            position: relative;
+            color: #495057;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #007bff;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .prose {
+            max-width: 800px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+            color: #212529;
+        }
+        .prose p, .prose ul, .prose ol, .prose blockquote {
+            color: #495057;
+        }
+        .prose a {
+            color: #007bff;
+        }
+        .prose code {
+            color: #e83e8c;
+            background-color: #f8f9fa;
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+            border: 1px solid #dee2e6;
+        }
+        .prose pre {
+            background-color: #212529;
+            color: #f8f9fa;
+            padding: 1em;
+            border-radius: 5px;
+        }
+        .prose pre code {
+            padding: 0;
+            margin: 0;
+            font-size: inherit;
+            color: inherit;
+            background-color: transparent;
+            border: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Global Sticky Navigation -->
+    <header class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-gray-800"><a href="index.html">Leo</a></div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="who-am-i.html" class="nav-link">Who Am I</a>
+                    <a href="my-experience.html" class="nav-link">My Experience</a>
+                    <a href="my-observations.html" class="nav-link">My Observations</a>
+                    <a href="perspectives.html" class="nav-link">Perspectives</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main class="max-w-4xl mx-auto py-16 px-4">
+        <header>
+            <h1 id="article-title"></h1>
+        </header>
+        <div class="container prose" id="article-content"></div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            
+            // Function to get click counts from localStorage
+            function getClickCounts() {
+                const clicks = localStorage.getItem('article_clicks');
+                return clicks ? JSON.parse(clicks) : {};
+            }
+
+            // Function to save click counts to localStorage
+            function saveClickCounts(clicks) {
+                localStorage.setItem('article_clicks', JSON.stringify(clicks));
+            }
+
+            // Function to increment click count
+            function incrementClickCount(articleId) {
+                const clickCounts = getClickCounts();
+                clickCounts[articleId] = (clickCounts[articleId] || 0) + 1;
+                saveClickCounts(clickCounts);
+            }
+
+            if (!articleId) {
+                document.getElementById('article-content').innerHTML = '<p>Article not found.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch('perspectives/articles.json');
+                const articles = await response.json();
+                const article = articles.find(a => a.id === articleId);
+
+                if (!article) {
+                    document.getElementById('article-content').innerHTML = '<p>Article not found.</p>';
+                    return;
+                }
+
+                // Increment click count when the article is loaded
+                incrementClickCount(article.id);
+
+                document.getElementById('article-title').textContent = article.title;
+                document.title = article.title;
+
+                const mdResponse = await fetch(article.markdownFile);
+                const markdown = await mdResponse.text();
+                
+                const converter = new showdown.Converter();
+                const html = converter.makeHtml(markdown);
+                
+                document.getElementById('article-content').innerHTML = html;
+
+            } catch (error) {
+                console.error("Error loading article:", error);
+                document.getElementById('article-content').innerHTML = '<p>Error loading article.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

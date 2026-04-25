@@ -3,16 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Note 2</title>
-    <link rel="stylesheet" href="notes.css">
+    <title>Note 2 - Leo's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .nav-link {
+            position: relative;
+            color: #495057;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #007bff;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Sample Note 2</h1>
+<body class="antialiased">
+
+    <!-- Global Sticky Navigation -->
+    <header class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-gray-800"><a href="../index.html">Leo</a></div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../who-am-i.html" class="nav-link">Who Am I</a>
+                    <a href="../my-experience.html" class="nav-link">My Experience</a>
+                    <a href="../my-observations.html" class="nav-link">My Observations</a>
+                    <a href="../perspectives.html" class="nav-link">Perspectives</a>
+                </div>
+            </div>
+        </nav>
     </header>
-    <div class="container">
+
+    <!-- Page Content -->
+    <main class="max-w-4xl mx-auto py-16 px-4">
+        <h1>Note 2</h1>
         <p>This is the content of the second sample note. You can write detailed information here.</p>
-    </div>
+    </main>
     <footer>
         <p>&copy; 2026 Your Name. All rights reserved.</p>
     </footer>

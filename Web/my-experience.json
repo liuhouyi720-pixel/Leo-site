@@ -1,0 +1,23 @@
+
+[
+    {
+        "title": "LLM Fine-tuning Experiments",
+        "date": "2026",
+        "summary": "Built small-scale experiments to compare prompt tuning and supervised fine-tuning for enterprise use cases."
+    },
+    {
+        "title": "ESG Data Consulting Due Diligence",
+        "date": "2025",
+        "summary": "Supported ESG data quality checks and reporting readiness during a consulting due diligence engagement."
+    },
+    {
+        "title": "Green M&A Research",
+        "date": "2024",
+        "summary": "Researched drivers behind high completion rates in performance commitments for green M&A cases."
+    },
+    {
+        "title": "Founded a Startup",
+        "date": "2023",
+        "summary": "Co-founded a tech startup focused on developing a new social networking platform."
+    }
+]

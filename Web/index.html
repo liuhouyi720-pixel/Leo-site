@@ -27,7 +27,7 @@
                     <a href="#who-am-i" class="hover:text-cyan-400">Who Am I</a>
                     <a href="#my-experience" class="hover:text-cyan-400">My Experience</a>
                     <a href="#my-observations" class="hover:text-cyan-400">My Observations</a>
-                    <a href="#my-perspectives" class="hover:text-cyan-400">My Perspectives</a>
+                    <a href="perspectives.html" class="hover:text-cyan-400">My Perspectives</a>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
     <!-- Section 4: My Perspectives -->
     <section id="my-perspectives" class="min-h-screen bg-gray-800 py-16">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-white mb-8 text-center">My Perspectives</h2>
+            <h2 class="text-4xl font-bold text-white mb-8 text-center"><a href="perspectives.html"></a>My Perspectives</a></h2>
             <div id="perspectives-container" class="space-y-8"></div>
         </div>
     </section>
@@ -134,26 +134,7 @@
                     imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80"
                 }
             ],
-            perspectives: [
-                {
-                    title: "Philosophy and AI",
-                    date: "2026-02-10",
-                    summary: "A reflection on how AI systems reshape the way we define reasoning, judgment, and responsibility.",
-                    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80"
-                },
-                {
-                    title: "Macro-trends in Tech Consulting",
-                    date: "2026-01-18",
-                    summary: "An outlook on consulting models that blend analytics, workflow automation, and applied AI governance.",
-                    imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"
-                },
-                {
-                    title: "MSBA Learning Notes",
-                    date: "2025-12-02",
-                    summary: "How coursework in statistics and product thinking can be translated into practical project delivery.",
-                    imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
-                }
-            ]
+
         };
 
         function openModal(modalId) {
@@ -179,21 +160,36 @@
 
         function renderPerspectiveCards(perspectives) {
             const container = document.getElementById('perspectives-container');
-
             container.innerHTML = perspectives.map((item) => `
                 <article class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col md:flex-row gap-4 md:items-center">
-                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full md:w-56 h-36 object-cover rounded-md" />
+                    <a href="article.html?id=${item.id}" class="flex-shrink-0">
+                         <img src="${item.imageUrl}" alt="${item.title}" class="w-full md:w-56 h-36 object-cover rounded-md" />
+                    </a>
                     <div>
                         <p class="text-sm text-gray-400">${item.date}</p>
-                        <h3 class="text-2xl font-bold text-cyan-400 mt-1">${item.title}</h3>
+                        <h3 class="text-2xl font-bold text-cyan-400 mt-1"><a href="article.html?id=${item.id}">${item.title}</a></h3>
                         <p class="text-gray-300 mt-2">${item.summary}</p>
                     </div>
                 </article>
             `).join('');
         }
 
+        async function loadLatestPerspectives() {
+            try {
+                const response = await fetch('perspectives/articles.json');
+                const articles = await response.json();
+
+                const sortedArticles = articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+                const latestArticles = sortedArticles.slice(0, 3);
+
+                renderPerspectiveCards(latestArticles);
+            } catch (error) {
+                console.error("Failed to load perspectives for homepage:", error);
+            }
+        }
+
         renderExperienceCards(portfolioData.experiences);
-        renderPerspectiveCards(portfolioData.perspectives);
+        loadLatestPerspectives();
 
         document.getElementById('linkedin-btn').addEventListener('click', () => openModal('linkedin-modal'));
         document.getElementById('handshake-btn').addEventListener('click', () => openModal('handshake-modal'));

@@ -1,0 +1,18 @@
+
+[
+    {
+        "title": "Life in the Alps",
+        "summary": "A visual journey through the serene landscapes of the Alps.",
+        "imageUrl": "https://via.placeholder.com/300"
+    },
+    {
+        "title": "Urban Exploration",
+        "summary": "Discovering the hidden gems of metropolitan cities.",
+        "imageUrl": "https://via.placeholder.com/300"
+    },
+    {
+        "title": "Architectural Marvels",
+        "summary": "A collection of impressive architectural designs from around the world.",
+        "imageUrl": "https://via.placeholder.com/300"
+    }
+]
