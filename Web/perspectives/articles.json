@@ -4,7 +4,7 @@
         "title": "Fire from Silicon Valley",
         "date": "2026-03-04",
         "summary": "By chance, I attended an AI workshop at Columbia University last week. It left me with a whirlwind of emotions. On one hand, I was awestruck by the current success and future potential of AI; on the other, I found myself standing once again at a major crossroads in my life.",
-        "imageUrl": "perspectives/images/silicon-valley-fire-1.jpg",
+        "imageUrl": "/Web/perspectives/images/silicon-valley-fire-1.jpg",
         "markdownFile": "perspectives/fire-from-silicon-valley.md"
     },
     {
@@ -12,7 +12,7 @@
         "title": "Philosophy and AI",
         "date": "2026-02-10",
         "summary": "A reflection on how AI systems reshape the way we define reasoning, judgment, and responsibility.",
-        "imageUrl": "perspectives/images/philosophy-ai.jpg",
+        "imageUrl": "/Web/perspectives/images/philosophy-ai.jpg",
         "markdownFile": "perspectives/philosophy-ai.md"
     },
     {
@@ -20,7 +20,7 @@
         "title": "Macro-trends in Tech Consulting",
         "date": "2026-01-18",
         "summary": "An outlook on consulting models that blend analytics, workflow automation, and applied AI governance.",
-        "imageUrl": "perspectives/images/tech-consulting.jpg",
+        "imageUrl": "/Web/perspectives/images/tech-consulting.jpg",
         "markdownFile": "perspectives/tech-consulting.md"
     },
     {
