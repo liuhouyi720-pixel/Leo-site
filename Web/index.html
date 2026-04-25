@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Personal Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Slate background */
+            color: #e2e8f0; /* Light text */
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Glassmorphism Navigation Bar -->
+    <nav class="sticky top-0 bg-opacity-30 backdrop-blur-md bg-gray-800 text-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold">My Portfolio</div>
+                <div class="space-x-4">
+                    <a href="#who-am-i" class="hover:text-cyan-400">Who Am I</a>
+                    <a href="#my-experience" class="hover:text-cyan-400">My Experience</a>
+                    <a href="#my-observations" class="hover:text-cyan-400">My Observations</a>
+                    <a href="#my-perspectives" class="hover:text-cyan-400">My Perspectives</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Updated Hero Section with Background Image and Modals -->
+    <section id="who-am-i" class="min-h-screen flex items-center justify-center relative text-center">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/random/1920x1080/?technology,dark');">
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+        <div class="relative z-10 max-w-4xl">
+            <h1 class="text-5xl font-bold text-white mb-6">Welcome to My Digital Space</h1>
+            <p class="text-lg text-gray-400 mb-8">A brief introduction about who I am, my journey, and my aspirations.</p>
+            <div class="flex justify-center space-x-4">
+                <button id="linkedin-btn" class="px-6 py-3 bg-cyan-500 text-white rounded-lg shadow-md hover:bg-cyan-400">Connect on LinkedIn</button>
+                <button id="handshake-btn" class="px-6 py-3 bg-cyan-500 text-white rounded-lg shadow-md hover:bg-cyan-400">Handshake</button>
+                <button id="resume-btn" class="px-6 py-3 bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-600">Download Resume</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="linkedin-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full">
+            <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onclick="closeModal('linkedin-modal')">&times;</button>
+            <h2 class="text-xl font-bold mb-4">Let's connect!</h2>
+            <p>I'm currently preparing for my MSBA journey and actively sharing insights on AI enterprise consulting and data analytics.</p>
+            <a href="https://www.linkedin.com/in/houyi-liu-leo" class="text-cyan-500 hover:underline">Visit my LinkedIn</a>
+        </div>
+    </div>
+
+    <div id="handshake-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full">
+            <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onclick="closeModal('handshake-modal')">&times;</button>
+            <h2 class="text-xl font-bold mb-4">Open to Opportunities</h2>
+            <p>Open to business analytics and digital transformation consulting opportunities.</p>
+        </div>
+    </div>
+
+    <div id="resume-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full">
+            <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onclick="closeModal('resume-modal')">&times;</button>
+            <h2 class="text-xl font-bold mb-4">Resume Summary</h2>
+            <p>Experience includes supporting ESG data consulting due diligence at J.P. Morgan, and conducting research on the formation mechanism of high completion rates for performance commitments in green M&A.</p>
+            <a href="Web/Resume Houyi LIU.pdf" download class="mt-4 px-6 py-3 bg-cyan-500 text-white rounded-lg shadow-md hover:bg-cyan-400">Download PDF</a>
+        </div>
+    </div>
+
+    <!-- Section 2: My Experience -->
+    <section id="my-experience" class="min-h-screen bg-gray-800 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-white mb-8 text-center">My Experience</h2>
+            <div id="experience-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Section 3: My Observations -->
+    <section id="my-observations" class="min-h-screen bg-gray-900 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-white mb-8 text-center">My Observations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                    <img src="https://via.placeholder.com/300" alt="Placeholder" class="rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-cyan-400">Life in the Alps</h3>
+                    <p class="text-gray-300">A visual journey through the serene landscapes of the Alps.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                    <img src="https://via.placeholder.com/300" alt="Placeholder" class="rounded-md mb-4">
+                    <h3 class="text-xl font-bold text-cyan-400">Urban Exploration</h3>
+                    <p class="text-gray-300">Discovering the hidden gems of metropolitan cities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: My Perspectives -->
+    <section id="my-perspectives" class="min-h-screen bg-gray-800 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-white mb-8 text-center">My Perspectives</h2>
+            <div id="perspectives-container" class="space-y-8"></div>
+        </div>
+    </section>
+
+    <!-- JavaScript to handle modals and dynamic portfolio cards -->
+    <script>
+        const portfolioData = {
+            experiences: [
+                {
+                    title: "ESG Data Consulting Due Diligence",
+                    date: "2025",
+                    summary: "Supported ESG data quality checks and reporting readiness during a consulting due diligence engagement.",
+                    imageUrl: "https://images.unsplash.com/photo-1551281044-8b5bd6f3a4e8?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                    title: "Green M&A Research",
+                    date: "2024",
+                    summary: "Researched drivers behind high completion rates in performance commitments for green M&A cases.",
+                    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                    title: "LLM Fine-tuning Experiments",
+                    date: "2026",
+                    summary: "Built small-scale experiments to compare prompt tuning and supervised fine-tuning for enterprise use cases.",
+                    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80"
+                }
+            ],
+            perspectives: [
+                {
+                    title: "Philosophy and AI",
+                    date: "2026-02-10",
+                    summary: "A reflection on how AI systems reshape the way we define reasoning, judgment, and responsibility.",
+                    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                    title: "Macro-trends in Tech Consulting",
+                    date: "2026-01-18",
+                    summary: "An outlook on consulting models that blend analytics, workflow automation, and applied AI governance.",
+                    imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                    title: "MSBA Learning Notes",
+                    date: "2025-12-02",
+                    summary: "How coursework in statistics and product thinking can be translated into practical project delivery.",
+                    imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+                }
+            ]
+        };
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function renderExperienceCards(experiences) {
+            const container = document.getElementById('experience-container');
+
+            container.innerHTML = experiences.map((item) => `
+                <article class="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-40 object-cover rounded-md mb-4" />
+                    <p class="text-sm text-gray-400">${item.date}</p>
+                    <h3 class="text-xl font-bold text-cyan-400 mt-1">${item.title}</h3>
+                    <p class="text-gray-300 mt-2">${item.summary}</p>
+                </article>
+            `).join('');
+        }
+
+        function renderPerspectiveCards(perspectives) {
+            const container = document.getElementById('perspectives-container');
+
+            container.innerHTML = perspectives.map((item) => `
+                <article class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col md:flex-row gap-4 md:items-center">
+                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full md:w-56 h-36 object-cover rounded-md" />
+                    <div>
+                        <p class="text-sm text-gray-400">${item.date}</p>
+                        <h3 class="text-2xl font-bold text-cyan-400 mt-1">${item.title}</h3>
+                        <p class="text-gray-300 mt-2">${item.summary}</p>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        renderExperienceCards(portfolioData.experiences);
+        renderPerspectiveCards(portfolioData.perspectives);
+
+        document.getElementById('linkedin-btn').addEventListener('click', () => openModal('linkedin-modal'));
+        document.getElementById('handshake-btn').addEventListener('click', () => openModal('handshake-modal'));
+        document.getElementById('resume-btn').addEventListener('click', () => openModal('resume-modal'));
+    </script>
+</body>
+</html>
