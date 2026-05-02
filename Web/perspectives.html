@@ -1,83 +1,126 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>观点 | Perspectives</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perspectives | Leo's Site</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">Leo's Site</a>
+      <nav class="nav-links">
+        <a href="who-am-i.html">About</a>
+        <a href="my-experience.html">Experience</a>
+        <a href="my-observations.html">Observations</a>
+        <a href="perspectives.html">Perspectives</a>
+        <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
+      </nav>
+    </div>
+  </header>
 
-    <div id="nav-container"></div>
+  <main class="container page-main">
+    <section id="featured" class="persp-feature"></section>
 
-    <main class="container mx-auto mt-8 p-4">
-        <section id="featured-article" class="mb-12"></section>
-        
-        <h2 class="text-3xl font-bold border-b-2 border-gray-300 pb-2 mb-6">Past Articles</h2>
-        <section id="article-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></section>
-    </main>
+    <section class="section" style="margin-top:90px;">
+      <h2>Past Articles</h2>
+      <div id="article-grid" class="grid-3"></div>
+    </section>
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Load Navigation
-            try {
-                const navResponse = await fetch('nav.html');
-                const navHtml = await navResponse.text();
-                document.getElementById('nav-container').innerHTML = navHtml;
-            } catch (error) {
-                console.error('Failed to load navigation:', error);
-            }
+  <footer class="footer section">
+    <div class="container">
+      <div class="top-line"></div>
+      <div class="footer-main">
+        <div>
+          <div class="brand" style="color:#222;">Leo's Site</div>
+          <div class="socials">
+            <a class="social" href="https://www.linkedin.com/in/houyi-liu-leo" target="_blank" rel="noopener">in</a>
+            <a class="social" href="perspectives.html">P</a>
+            <a class="social" href="mailto:houyi.leo@example.com">@</a>
+            <a class="social" href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">CV</a>
+          </div>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="who-am-i.html">About</a></li>
+            <li><a href="my-experience.html">Experience</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Writing</h4>
+          <ul>
+            <li><a href="perspectives.html">Perspectives</a></li>
+            <li><a href="notes/index.html">Notes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:houyi.leo@example.com">Email</a></li>
+            <li><a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">Resume</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-            // Load Articles
-            try {
-                const response = await fetch('perspectives/articles.json');
-                const articles = await response.json();
-                
-                // Sort articles by date to find the latest
-                articles.sort((a, b) => new Date(b.date) - new Date(a.date));
-                
-                const [latestArticle, ...otherArticles] = articles;
+  <script>
+    const fallbackImage = 'https://www.figma.com/api/mcp/asset/4db08436-dea6-4fd4-b7c4-39674282dcaa';
 
-                // Render Featured Article
-                const featuredContainer = document.getElementById('featured-article');
-                if (latestArticle) {
-                    featuredContainer.innerHTML = `
-                        <a href="article.html?id=${latestArticle.id}" class="block group">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                <img src="${latestArticle.imageUrl}" alt="${latestArticle.title}" class="w-full h-auto object-cover rounded-lg shadow-lg">
-                                <div>
-                                    <p class="text-sm text-gray-500 mb-2">${new Date(latestArticle.date).toLocaleDateString()}</p>
-                                    <h1 class="text-4xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">${latestArticle.title}</h1>
-                                    <p class="text-gray-600 mt-4">${latestArticle.summary}</p>
-                                </div>
-                            </div>
-                        </a>
-                    `;
-                }
+    function formatDate(value) {
+      return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
 
-                // Render Article Grid
-                const gridContainer = document.getElementById('article-grid');
-                if (otherArticles.length > 0) {
-                    gridContainer.innerHTML = otherArticles.map(article => `
-                        <a href="article.html?id=${article.id}" class="block group bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                            <img src="${article.imageUrl}" alt="${article.title}" class="w-full h-48 object-cover rounded-md mb-4">
-                            <p class="text-xs text-gray-500 mb-1">${new Date(article.date).toLocaleDateString()}</p>
-                            <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">${article.title}</h3>
-                            <p class="text-sm text-gray-600 mt-2">${article.summary}</p>
-                        </a>
-                    `).join('');
-                } else {
-                    gridContainer.innerHTML = '<p>No other articles found.</p>';
-                }
+    async function loadPerspectives() {
+      const featured = document.getElementById('featured');
+      const grid = document.getElementById('article-grid');
 
-            } catch (error) {
-                console.error("Failed to load articles:", error);
-                document.getElementById('article-grid').innerHTML = '<p class="text-red-500">Error loading articles.</p>';
-            }
-        });
-    </script>
+      try {
+        const response = await fetch('perspectives/articles.json');
+        const articles = await response.json();
+        const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
 
+        if (sorted.length === 0) {
+          featured.innerHTML = '<p>No articles available.</p>';
+          return;
+        }
+
+        const [latest, ...others] = sorted;
+
+        featured.innerHTML = `
+          <a href="article.html?id=${latest.id}">
+            <img src="${latest.imageUrl}" alt="${latest.title}" onerror="this.src='${fallbackImage}'">
+          </a>
+          <div>
+            <p class="meta">${formatDate(latest.date)}</p>
+            <h1><a href="article.html?id=${latest.id}">${latest.title}</a></h1>
+            <p class="page-subtitle" style="margin-top:18px;">${latest.summary}</p>
+          </div>
+        `;
+
+        grid.innerHTML = others.map((article) => `
+          <article class="card">
+            <a href="article.html?id=${article.id}">
+              <img src="${article.imageUrl}" alt="${article.title}" onerror="this.src='${fallbackImage}'" style="aspect-ratio:404/346;">
+            </a>
+            <div>
+              <h3><a href="article.html?id=${article.id}">${article.title}</a></h3>
+              <p>${formatDate(article.date)}</p>
+              <p>${article.summary}</p>
+            </div>
+          </article>
+        `).join('');
+      } catch (error) {
+        featured.innerHTML = '<p>Unable to load featured article.</p>';
+        grid.innerHTML = '<p>Unable to load article list.</p>';
+      }
+    }
+
+    loadPerspectives();
+  </script>
 </body>
 </html>

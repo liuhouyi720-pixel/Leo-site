@@ -1,34 +1,35 @@
 [
-    {
-        "id": "fire-from-silicon-valley",
-        "title": "Fire from Silicon Valley",
-        "date": "2026-03-04",
-        "summary": "By chance, I attended an AI workshop at Columbia University last week. It left me with a whirlwind of emotions. On one hand, I was awestruck by the current success and future potential of AI; on the other, I found myself standing once again at a major crossroads in my life.",
-        "imageUrl": "/perspectives/images/silicon-valley-fire-1.jpg",
-        "markdownFile": "perspectives/fire-from-silicon-valley.md"
-    },
-    {
-        "id": "philosophy-ai",
-        "title": "Philosophy and AI",
-        "date": "2026-02-10",
-        "summary": "A reflection on how AI systems reshape the way we define reasoning, judgment, and responsibility.",
-        "imageUrl": "/perspectives/images/philosophy-ai.jpg",
-        "markdownFile": "perspectives/philosophy-ai.md"
-    },
-    {
-        "id": "tech-consulting",
-        "title": "Macro-trends in Tech Consulting",
-        "date": "2026-01-18",
-        "summary": "An outlook on consulting models that blend analytics, workflow automation, and applied AI governance.",
-        "imageUrl": "/perspectives/images/tech-consulting.jpg",
-        "markdownFile": "perspectives/tech-consulting.md"
-    },
-    {
-        "id": "msba-notes",
-        "title": "MSBA Learning Notes",
-        "date": "2025-12-02",
-        "summary": "How coursework in statistics and product thinking can be translated into practical project delivery.",
-        "imageUrl": "/perspectives/images/msba-notes.jpg",
-        "markdownFile": "perspectives/msba-notes.md"
-    }
+  {
+    "id": "fire-from-silicon-valley",
+    "title": "Fire from Silicon Valley",
+    "date": "2026-03-04",
+    "summary": "By chance, I attended an AI workshop at Columbia University last week. It left me with a whirlwind of emotions. On one hand, I was awestruck by the current success and future potential of AI; on the other, I found myself standing once again at a major crossroads in my life.",
+    "imageUrl": "perspectives/images/silicon-valley-fire-1.jpg",
+    "markdownFile": "perspectives/Fire-from-silicon-valley.md"
+  },
+  {
+    "id": "philosophy-ai",
+    "title": "Philosophy and AI",
+    "date": "2026-02-10",
+    "summary": "A reflection on how AI systems reshape the way we define reasoning, judgment, and responsibility.",
+    "imageUrl": "https://www.figma.com/api/mcp/asset/0baeba9f-2393-401f-82d2-689c8bddefcb",
+    "markdownFile": "perspectives/philosophy-ai.md"
+  },
+  {
+    "id": "tech-consulting",
+    "title": "Macro-trends in Tech Consulting",
+    "date": "2026-01-18",
+    "summary": "An outlook on consulting models that blend analytics, workflow automation, and applied AI governance.",
+    "imageUrl": "https://www.figma.com/api/mcp/asset/1fb07b16-32ce-470c-8ac7-b0cb6e8a414a",
+    "markdownFile": "perspectives/tech-consulting.md"
+  },
+  {
+    "id": "msba-notes",
+    "title": "MSBA Learning Notes",
+    "date": "2025-12-02",
+    "summary": "How coursework in statistics and product thinking can be translated into practical project delivery.",
+    "imageUrl": "https://www.figma.com/api/mcp/asset/5cb44582-efe0-47c1-af78-bbdb80c11f56",
+    "markdownFile": "perspectives/msba-notes.md"
+  }
 ]
+

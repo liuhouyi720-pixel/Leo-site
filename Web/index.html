@@ -1,196 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Personal Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; /* Light Gray background */
-            color: #212529; /* Dark text */
-        }
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo's Site</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Sticky Glassmorphism Navigation Bar -->
-    <nav class="sticky top-0 bg-white text-gray-800 shadow-md z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="text-2xl font-bold">My Portfolio</div>
-                <div class="space-x-4">
-                    <a href="#who-am-i" class="hover:text-blue-500">Who Am I</a>
-                    <a href="#my-experience" class="hover:text-blue-500">My Experience</a>
-                    <a href="#my-observations" class="hover:text-blue-500">My Observations</a>
-                    <a href="perspectives.html" class="hover:text-blue-500">My Perspectives</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Updated Hero Section -->
-    <section id="who-am-i" class="min-h-screen flex items-center justify-center text-center bg-white py-16">
-        <div class="max-w-4xl">
-            <h1 class="text-5xl font-bold text-gray-800 mb-6">Welcome to My Digital Space</h1>
-            <p class="text-lg text-gray-600 mb-8">A brief introduction about who I am, my journey, and my aspirations.</p>
-            <div class="flex justify-center space-x-4">
-                <button id="linkedin-btn" class="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">Connect on LinkedIn</button>
-                <button id="handshake-btn" class="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">Handshake</button>
-                <button id="resume-btn" class="px-6 py-3 bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-600">Download Resume</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modals -->
-    <div id="linkedin-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full">
-            <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onclick="closeModal('linkedin-modal')">&times;</button>
-            <h2 class="text-xl font-bold mb-4">Let's connect!</h2>
-            <p>I'm currently preparing for my MSBA journey and actively sharing insights on AI enterprise consulting and data analytics.</p>
-            <a href="https://www.linkedin.com/in/houyi-liu-leo" class="text-cyan-500 hover:underline">Visit my LinkedIn</a>
-        </div>
+  <header class="site-header hero-mode">
+    <div class="container">
+      <a class="brand" href="index.html">Leo's Site</a>
+      <nav class="nav-links">
+        <a href="who-am-i.html">About</a>
+        <a href="my-experience.html">Experience</a>
+        <a href="my-observations.html">Observations</a>
+        <a href="perspectives.html">Perspectives</a>
+        <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
+      </nav>
     </div>
+  </header>
 
-    <div id="handshake-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full">
-            <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onclick="closeModal('handshake-modal')">&times;</button>
-            <h2 class="text-xl font-bold mb-4">Open to Opportunities</h2>
-            <p>Open to business analytics and digital transformation consulting opportunities.</p>
+  <main class="page-main">
+    <section class="hero">
+      <img src="https://www.figma.com/api/mcp/asset/ce6c74de-094b-4393-93ea-25dd431c4520" alt="Hero image">
+      <div class="hero-overlay"></div>
+      <div class="hero-copy">
+        <h1>Leo's Site</h1>
+        <p>Business analytics, AI consulting, and project thinking translated into clear stories, practical frameworks, and shipped work.</p>
+        <div class="hero-actions">
+          <a class="btn" href="who-am-i.html">About Me</a>
+          <a class="btn-light" href="perspectives.html">Read Perspectives</a>
         </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <h2>Current Focus</h2>
+      <div class="grid-3">
+        <article class="card">
+          <img src="https://www.figma.com/api/mcp/asset/6de2a4ec-f884-41f4-bcae-502ad8d9351b" alt="Experience">
+          <div>
+            <h3>Enterprise AI Delivery</h3>
+            <p>Building practical AI workflows that can be adopted by real teams.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://www.figma.com/api/mcp/asset/3ade90d0-0eae-46d2-a66c-146b480e4561" alt="Analytics">
+          <div>
+            <h3>Business Analytics</h3>
+            <p>Turning noisy data into clear decisions and measurable impact.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://www.figma.com/api/mcp/asset/7de76e2f-afa8-46f9-9942-6217215ae965" alt="Research">
+          <div>
+            <h3>Research to Action</h3>
+            <p>Connecting academic thinking with execution in consulting contexts.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container split">
+      <div>
+        <h2>How I Work</h2>
+        <div class="stack">
+          <div>
+            <h3>Structured Discovery</h3>
+            <p>Clarify goals, constraints, and hidden assumptions before building.</p>
+          </div>
+          <div>
+            <h3>Fast Iteration</h3>
+            <p>Prototype quickly, validate with feedback, and improve in short loops.</p>
+          </div>
+          <div>
+            <h3>Durable Outcomes</h3>
+            <p>Deliver artifacts and systems that teams can keep using after handoff.</p>
+          </div>
+        </div>
+        <div class="hero-actions" style="justify-content:flex-start; margin-top: 40px;">
+          <a class="btn" href="my-experience.html">See Experience</a>
+          <a class="btn-light" href="who-am-i.html">Who Am I</a>
+        </div>
+      </div>
+      <div class="split-image">
+        <img src="https://www.figma.com/api/mcp/asset/a6683a60-d71c-423a-8701-54548b369e55" alt="How I work">
+      </div>
+    </section>
+
+    <section class="section container">
+      <h2>Latest Perspectives</h2>
+      <div id="latest-perspectives" class="grid-2"></div>
+    </section>
+
+    <section class="section container">
+      <h2>Feedback</h2>
+      <div class="quote-grid">
+        <article class="quote-card">
+          <blockquote>"A terrific piece of praise"</blockquote>
+          <div class="quote-meta">
+            <img src="https://www.figma.com/api/mcp/asset/385412a2-7a05-49f0-8924-593857298725" alt="Avatar">
+            <div><strong>Name</strong><span>Description</span></div>
+          </div>
+        </article>
+        <article class="quote-card">
+          <blockquote>"A fantastic bit of feedback"</blockquote>
+          <div class="quote-meta">
+            <img src="https://www.figma.com/api/mcp/asset/594fe6aa-14c0-49c7-ba71-978355711d50" alt="Avatar">
+            <div><strong>Name</strong><span>Description</span></div>
+          </div>
+        </article>
+        <article class="quote-card">
+          <blockquote>"A genuinely glowing review"</blockquote>
+          <div class="quote-meta">
+            <img src="https://www.figma.com/api/mcp/asset/a0f3f206-8962-4d1d-97f3-bd2370bfdad0" alt="Avatar">
+            <div><strong>Name</strong><span>Description</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-strip section">
+      <div class="container">
+        <h2 style="margin:0;">Let's Build Something Useful</h2>
+        <div class="hero-actions" style="margin-top:0;">
+          <a class="btn" href="mailto:houyi.leo@example.com">Contact</a>
+          <a class="btn-light" href="perspectives.html">Read More</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="top-line"></div>
+      <div class="footer-main">
+        <div>
+          <div class="brand" style="color:#222;">Leo's Site</div>
+          <div class="socials">
+            <a class="social" href="https://www.linkedin.com/in/houyi-liu-leo" target="_blank" rel="noopener">in</a>
+            <a class="social" href="perspectives.html">P</a>
+            <a class="social" href="mailto:houyi.leo@example.com">@</a>
+            <a class="social" href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">CV</a>
+          </div>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="who-am-i.html">About</a></li>
+            <li><a href="my-experience.html">Experience</a></li>
+            <li><a href="my-observations.html">Observations</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Writing</h4>
+          <ul>
+            <li><a href="perspectives.html">Perspectives</a></li>
+            <li><a href="article.html?id=fire-from-silicon-valley">Featured Article</a></li>
+            <li><a href="notes/index.html">Notes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/houyi-liu-leo" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">Resume</a></li>
+            <li><a href="mailto:houyi.leo@example.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </footer>
 
-    <div id="resume-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full">
-            <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onclick="closeModal('resume-modal')">&times;</button>
-            <h2 class="text-xl font-bold mb-4">Resume Summary</h2>
-            <p>Experience includes supporting ESG data consulting due diligence at J.P. Morgan, and conducting research on the formation mechanism of high completion rates for performance commitments in green M&A.</p>
-            <a href="Web/Resume Houyi LIU.pdf" download class="mt-4 px-6 py-3 bg-cyan-500 text-white rounded-lg shadow-md hover:bg-cyan-400">Download PDF</a>
-        </div>
-    </div>
+  <script>
+    async function loadLatestPerspectives() {
+      const container = document.getElementById('latest-perspectives');
+      try {
+        const response = await fetch('perspectives/articles.json');
+        const articles = await response.json();
+        const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 2);
+        container.innerHTML = sorted.map((item) => {
+          const dateText = new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+          return `
+            <article class="card">
+              <a href="article.html?id=${item.id}">
+                <img src="${item.imageUrl}" alt="${item.title}" onerror="this.src='https://www.figma.com/api/mcp/asset/75900abe-b385-4917-8c28-3c067ce0d46e'">
+              </a>
+              <div>
+                <h3><a href="article.html?id=${item.id}">${item.title}</a></h3>
+                <p>${dateText}</p>
+                <p>${item.summary}</p>
+              </div>
+            </article>
+          `;
+        }).join('');
+      } catch (error) {
+        container.innerHTML = '<p>Unable to load latest perspectives.</p>';
+      }
+    }
 
-    <!-- Section 2: My Experience -->
-    <section id="my-experience" class="py-16 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">My Experience</h2>
-            <div id="experience-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-        </div>
-    </section>
-
-    <!-- Section 3: My Observations -->
-    <section id="my-observations" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">My Observations</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                    <img src="https://via.placeholder.com/300" alt="Placeholder" class="rounded-md mb-4">
-                    <h3 class="text-xl font-bold text-blue-500">Life in the Alps</h3>
-                    <p class="text-gray-600">A visual journey through the serene landscapes of the Alps.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                    <img src="https://via.placeholder.com/300" alt="Placeholder" class="rounded-md mb-4">
-                    <h3 class="text-xl font-bold text-blue-500">Urban Exploration</h3>
-                    <p class="text-gray-600">Discovering the hidden gems of metropolitan cities.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 4: My Perspectives -->
-    <section id="my-perspectives" class="py-16 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center"><a href="perspectives.html"></a>My Perspectives</a></h2>
-            <div id="perspectives-container" class="space-y-8"></div>
-        </div>
-    </section>
-
-    <!-- JavaScript to handle modals and dynamic portfolio cards -->
-    <script>
-        const portfolioData = {
-            experiences: [
-                {
-                    title: "ESG Data Consulting Due Diligence",
-                    date: "2025",
-                    summary: "Supported ESG data quality checks and reporting readiness during a consulting due diligence engagement.",
-                    imageUrl: "https://images.unsplash.com/photo-1551281044-8b5bd6f3a4e8?auto=format&fit=crop&w=900&q=80"
-                },
-                {
-                    title: "Green M&A Research",
-                    date: "2024",
-                    summary: "Researched drivers behind high completion rates in performance commitments for green M&A cases.",
-                    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80"
-                },
-                {
-                    title: "LLM Fine-tuning Experiments",
-                    date: "2026",
-                    summary: "Built small-scale experiments to compare prompt tuning and supervised fine-tuning for enterprise use cases.",
-                    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80"
-                }
-            ],
-
-        };
-
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
-
-        function renderExperienceCards(experiences) {
-            const container = document.getElementById('experience-container');
-
-            container.innerHTML = experiences.map((item) => `
-                <article class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-40 object-cover rounded-md mb-4" />
-                    <p class="text-sm text-gray-500">${item.date}</p>
-                    <h3 class="text-xl font-bold text-blue-500 mt-1">${item.title}</h3>
-                    <p class="text-gray-600 mt-2">${item.summary}</p>
-                </article>
-            `).join('');
-        }
-
-        function renderPerspectiveCards(perspectives) {
-            const container = document.getElementById('perspectives-container');
-            container.innerHTML = perspectives.map((item) => `
-                <article class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row gap-4 md:items-center">
-                    <a href="article.html?id=${item.id}" class="flex-shrink-0">
-                         <img src="${item.imageUrl}" alt="${item.title}" class="w-full md:w-56 h-36 object-cover rounded-md" />
-                    </a>
-                    <div>
-                        <p class="text-sm text-gray-500">${item.date}</p>
-                        <h3 class="text-2xl font-bold text-blue-500 mt-1"><a href="article.html?id=${item.id}">${item.title}</a></h3>
-                        <p class="text-gray-600 mt-2">${item.summary}</p>
-                    </div>
-                </article>
-            `).join('');
-        }
-
-        async function loadLatestPerspectives() {
-            try {
-                const response = await fetch('perspectives/articles.json');
-                const articles = await response.json();
-
-                const sortedArticles = articles.sort((a, b) => new Date(b.date) - new Date(a.date));
-                const latestArticles = sortedArticles.slice(0, 3);
-
-                renderPerspectiveCards(latestArticles);
-            } catch (error) {
-                console.error("Failed to load perspectives for homepage:", error);
-            }
-        }
-
-        renderExperienceCards(portfolioData.experiences);
-        loadLatestPerspectives();
-
-        document.getElementById('linkedin-btn').addEventListener('click', () => openModal('linkedin-modal'));
-        document.getElementById('handshake-btn').addEventListener('click', () => openModal('handshake-modal'));
-        document.getElementById('resume-btn').addEventListener('click', () => openModal('resume-modal'));
-    </script>
+    loadLatestPerspectives();
+  </script>
 </body>
 </html>

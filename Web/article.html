@@ -1,91 +1,154 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article</title> <!-- Title will be updated dynamically -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article | Leo's Site</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 </head>
-<body class="bg-gray-100">
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">Leo's Site</a>
+      <nav class="nav-links">
+        <a href="who-am-i.html">About</a>
+        <a href="my-experience.html">Experience</a>
+        <a href="my-observations.html">Observations</a>
+        <a href="perspectives.html">Perspectives</a>
+        <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
+      </nav>
+    </div>
+  </header>
 
-    <div id="nav-container"></div>
+  <main class="container page-main article-layout">
+    <section class="article-head">
+      <h1 id="article-title">Article title</h1>
+      <p id="article-subtitle">Subheading that sets up context and helps readers enter the story.</p>
+    </section>
 
-    <main class="container mx-auto mt-24 p-4">
-        <article id="article-container" class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-lg prose lg:prose-xl">
-            <!-- Article content will be injected here -->
-            <h1 id="article-title" class="mb-8"></h1>
-            <div id="article-content"></div>
-        </article>
-    </main>
+    <section class="article-lead-image">
+      <img id="article-image" src="https://www.figma.com/api/mcp/asset/5e849b28-52e6-4c37-a5af-48dc2a536dd8" alt="Article lead image">
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Load Navigation
-            try {
-                const navResponse = await fetch('nav.html');
-                const navHtml = await navResponse.text();
-                document.getElementById('nav-container').innerHTML = navHtml;
-            } catch (error) {
-                console.error('Failed to load navigation:', error);
-            }
+    <section id="article-content" class="article-content"></section>
 
-            // Load Article Content
-            const urlParams = new URLSearchParams(window.location.search);
-            const articleId = urlParams.get('id');
-            const articleTitleEl = document.getElementById('article-title');
-            const articleContentEl = document.getElementById('article-content');
+    <section class="duo section">
+      <img src="https://www.figma.com/api/mcp/asset/4db08436-dea6-4fd4-b7c4-39674282dcaa" alt="Gallery image 1">
+      <img src="https://www.figma.com/api/mcp/asset/5cb44582-efe0-47c1-af78-bbdb80c11f56" alt="Gallery image 2">
+    </section>
 
-            if (!articleId) {
-                articleTitleEl.textContent = 'Error';
-                articleContentEl.innerHTML = '<p>Article not found. Please provide an article ID.</p>';
-                return;
-            }
+    <section class="section">
+      <h2 style="font-size:40px;">Related articles or posts</h2>
+      <div id="related-grid" class="related-grid"></div>
+    </section>
+  </main>
 
-            try {
-                // 1. Fetch metadata from articles.json
-                const metaResponse = await fetch('perspectives/articles.json');
-                const articles = await metaResponse.json();
-                const articleMeta = articles.find(a => a.id === articleId);
+  <footer class="footer section">
+    <div class="container">
+      <div class="top-line"></div>
+      <div class="footer-main">
+        <div>
+          <div class="brand" style="color:#222;">Leo's Site</div>
+          <div class="socials">
+            <a class="social" href="https://www.linkedin.com/in/houyi-liu-leo" target="_blank" rel="noopener">in</a>
+            <a class="social" href="perspectives.html">P</a>
+            <a class="social" href="mailto:houyi.leo@example.com">@</a>
+            <a class="social" href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">CV</a>
+          </div>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="who-am-i.html">About</a></li>
+            <li><a href="my-experience.html">Experience</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Writing</h4>
+          <ul>
+            <li><a href="perspectives.html">Perspectives</a></li>
+            <li><a href="notes/index.html">Notes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:houyi.leo@example.com">Email</a></li>
+            <li><a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">Resume</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-                if (!articleMeta) {
-                    articleTitleEl.textContent = 'Not Found';
-                    articleContentEl.innerHTML = `<p>Could not find an article with ID: ${articleId}</p>`;
-                    return;
-                }
+  <script>
+    const fallbackImage = 'https://www.figma.com/api/mcp/asset/803cdd56-aa8e-4edf-abdb-2ec8ebf168c6';
 
-                // Update page and H1 title
-                document.title = articleMeta.title;
-                articleTitleEl.textContent = articleMeta.title;
+    function formatDate(value) {
+      return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
 
-                // 2. Fetch the actual Markdown file content
-                const markdownResponse = await fetch(articleMeta.markdownFile);
-                const markdownWithFrontMatter = await markdownResponse.text();
+    function stripFrontMatter(markdown) {
+      return markdown.replace(/^---[\s\S]*?---/, '').trim();
+    }
 
-                // 3. Strip the Front Matter from the markdown content
-                // This regex specifically targets the front matter at the beginning of the file.
-                const markdownBody = markdownWithFrontMatter.replace(/^---[\s\S]+?---/, '').trim();
+    async function loadArticle() {
+      const params = new URLSearchParams(window.location.search);
+      const articleId = params.get('id');
 
-                // 4. Convert Markdown to HTML using Showdown
-                const converter = new showdown.Converter({
-                    tables: true, // Enable table support
-                    strikethrough: true, // Enable strikethrough support
-                    tasklists: true // Enable task list support
-                });
-                const htmlContent = converter.makeHtml(markdownBody);
+      const titleEl = document.getElementById('article-title');
+      const subtitleEl = document.getElementById('article-subtitle');
+      const imageEl = document.getElementById('article-image');
+      const contentEl = document.getElementById('article-content');
+      const relatedEl = document.getElementById('related-grid');
 
-                // 5. Inject the HTML into the page
-                articleContentEl.innerHTML = htmlContent;
+      try {
+        const metaRes = await fetch('perspectives/articles.json');
+        const articles = await metaRes.json();
 
-            } catch (error) {
-                console.error('Failed to load article:', error);
-                articleTitleEl.textContent = 'Error';
-                articleContentEl.innerHTML = '<p>There was an error loading the article. Please check the console for more details.</p>';
-            }
-        });
-    </script>
+        const selected = articles.find((article) => article.id === articleId) || articles[0];
+        if (!selected) {
+          titleEl.textContent = 'Article not found';
+          subtitleEl.textContent = 'No article metadata is available.';
+          return;
+        }
 
+        document.title = `${selected.title} | Leo's Site`;
+        titleEl.textContent = selected.title;
+        subtitleEl.textContent = `${formatDate(selected.date)} - ${selected.summary}`;
+        imageEl.src = selected.imageUrl;
+        imageEl.alt = selected.title;
+        imageEl.onerror = () => { imageEl.src = fallbackImage; };
+
+        try {
+          const markdownRes = await fetch(selected.markdownFile);
+          const markdown = await markdownRes.text();
+          const converter = new showdown.Converter({ tables: true, strikethrough: true, tasklists: true });
+          contentEl.innerHTML = converter.makeHtml(stripFrontMatter(markdown));
+        } catch (error) {
+          contentEl.innerHTML = '<p>Unable to load the markdown content for this article.</p>';
+        }
+
+        const related = articles.filter((article) => article.id !== selected.id).slice(0, 3);
+        relatedEl.innerHTML = related.map((article) => `
+          <article class="related-card">
+            <a href="article.html?id=${article.id}">
+              <img src="${article.imageUrl}" alt="${article.title}" onerror="this.src='${fallbackImage}'">
+            </a>
+            <h3><a href="article.html?id=${article.id}">${article.title}</a></h3>
+            <p>${formatDate(article.date)}</p>
+          </article>
+        `).join('');
+      } catch (error) {
+        titleEl.textContent = 'Error loading article';
+        subtitleEl.textContent = 'Please try again later.';
+        contentEl.innerHTML = '<p>Failed to load article data.</p>';
+      }
+    }
+
+    loadArticle();
+  </script>
 </body>
 </html>
