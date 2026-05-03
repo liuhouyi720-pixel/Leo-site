@@ -1,93 +1,94 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Observations - Leo's Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-        }
-        .nav-link {
-            position: relative;
-            color: #495057;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #007bff;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover, .nav-link.active {
-            color: #007bff;
-        }
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Observations | Leo's Site</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased">
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">Leo's Site</a>
+      <nav class="nav-links">
+        <a href="who-am-i.html">About</a>
+        <a href="my-experience.html">Experience</a>
+        <a href="my-observations.html">Observations</a>
+        <a href="perspectives.html">Perspectives</a>
+        <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Global Sticky Navigation -->
-    <header class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="text-2xl font-bold text-gray-800"><a href="index.html">Leo</a></div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="who-am-i.html" class="nav-link">Who Am I</a>
-                    <a href="my-experience.html" class="nav-link">My Experience</a>
-                    <a href="my-observations.html" class="nav-link active">My Observations</a>
-                    <a href="perspectives.html" class="nav-link">Perspectives</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <main class="container page-main">
+    <section class="section" style="margin-top:40px;">
+      <h1 class="page-title">My Observations</h1>
+      <p class="page-subtitle">Snapshots, notes, and visual moments that influence how I think about work and life.</p>
+      <div id="observation-grid" class="obs-grid" style="margin-top:40px;"></div>
+    </section>
+  </main>
 
-    <!-- Page Content -->
-    <main class="max-w-7xl mx-auto py-16 px-4">
-        <h1 class="text-4xl font-bold text-gray-900 mb-8 text-center">My Observations</h1>
-        <div id="content-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Content will be loaded here -->
+  <footer class="footer section">
+    <div class="container">
+      <div class="top-line"></div>
+      <div class="footer-main">
+        <div>
+          <div class="brand" style="color:#222;">Leo's Site</div>
+          <div class="socials">
+            <a class="social" href="https://www.linkedin.com/in/houyi-liu-leo" target="_blank" rel="noopener">in</a>
+            <a class="social" href="perspectives.html">P</a>
+            <a class="social" href="mailto:houyi.leo@example.com">@</a>
+            <a class="social" href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">CV</a>
+          </div>
         </div>
-    </main>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="who-am-i.html">About</a></li>
+            <li><a href="my-experience.html">Experience</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Writing</h4>
+          <ul>
+            <li><a href="perspectives.html">Perspectives</a></li>
+            <li><a href="notes/index.html">Notes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:houyi.leo@example.com">Email</a></li>
+            <li><a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">Resume</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async function () {
-            try {
-                const response = await fetch('my-observations.json');
-                const data = await response.json();
-                renderContent(data);
-            } catch (error) {
-                console.error("Failed to load page content:", error);
-                document.getElementById('content-container').innerHTML = '<p class="text-red-500 text-center col-span-full">Error loading content.</p>';
-            }
-        });
+  <script>
+    const fallbackImage = 'https://www.figma.com/api/mcp/asset/e03f7b36-c14e-405a-a093-94a32f495e3a';
 
-        function renderContent(data) {
-            const container = document.getElementById('content-container');
-            container.innerHTML = data.map(item => `
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="${item.imageUrl}" alt="${item.title}" class="rounded-md mb-4 w-full h-48 object-cover">
-                    <h3 class="text-xl font-bold text-blue-700">${item.title}</h3>
-                    <p class="text-gray-600 mt-2">${item.summary}</p>
-                </div>
-            `).join('');
-        }
-    </script>
+    async function loadObservations() {
+      const grid = document.getElementById('observation-grid');
+      try {
+        const response = await fetch('my-observations.json');
+        const data = await response.json();
+
+        grid.innerHTML = data.map((item) => `
+          <article class="obs-card">
+            <img src="${item.imageUrl}" alt="${item.title}" onerror="this.src='${fallbackImage}'">
+            <h3>${item.title}</h3>
+            <p>${item.summary}</p>
+          </article>
+        `).join('');
+      } catch (error) {
+        grid.innerHTML = '<p>Unable to load observation content.</p>';
+      }
+    }
+
+    loadObservations();
+  </script>
 </body>
 </html>

@@ -1,114 +1,126 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Perspectives</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="notes/notes.css">
-    <style>
-        body {
-            background-color: #1a202c; /* Slate background */
-            color: #e2e8f0; /* Light text */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perspectives | Leo's Site</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>My Perspectives</h1>
-    </header>
-
-    <div class="max-w-7xl mx-auto px-4 py-8">
-        <!-- Sorting Controls -->
-        <div class="flex justify-end items-center mb-8">
-            <label for="sort-by" class="text-gray-400 mr-2">Sort by:</label>
-            <select id="sort-by" class="bg-gray-700 text-white rounded-md p-2">
-                <option value="date">Latest</option>
-                <option value="clicks">Popularity</option>
-            </select>
-        </div>
-
-        <!-- Articles Container -->
-        <div id="perspectives-container" class="space-y-8"></div>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">Leo's Site</a>
+      <nav class="nav-links">
+        <a href="who-am-i.html">About</a>
+        <a href="my-experience.html">Experience</a>
+        <a href="my-observations.html">Observations</a>
+        <a href="perspectives.html">Perspectives</a>
+        <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
+      </nav>
     </div>
+  </header>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async function () {
-            const container = document.getElementById('perspectives-container');
-            const sortBySelect = document.getElementById('sort-by');
-            let articles = [];
+  <main class="container page-main">
+    <section id="featured" class="persp-feature"></section>
 
-            // Function to get click counts from localStorage
-            function getClickCounts() {
-                const clicks = localStorage.getItem('article_clicks');
-                return clicks ? JSON.parse(clicks) : {};
-            }
+    <section class="section" style="margin-top:90px;">
+      <h2>Past Articles</h2>
+      <div id="article-grid" class="grid-3"></div>
+    </section>
+  </main>
 
-            // Function to save click counts to localStorage
-            function saveClickCounts(clicks) {
-                localStorage.setItem('article_clicks', JSON.stringify(clicks));
-            }
+  <footer class="footer section">
+    <div class="container">
+      <div class="top-line"></div>
+      <div class="footer-main">
+        <div>
+          <div class="brand" style="color:#222;">Leo's Site</div>
+          <div class="socials">
+            <a class="social" href="https://www.linkedin.com/in/houyi-liu-leo" target="_blank" rel="noopener">in</a>
+            <a class="social" href="perspectives.html">P</a>
+            <a class="social" href="mailto:houyi.leo@example.com">@</a>
+            <a class="social" href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">CV</a>
+          </div>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="who-am-i.html">About</a></li>
+            <li><a href="my-experience.html">Experience</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Writing</h4>
+          <ul>
+            <li><a href="perspectives.html">Perspectives</a></li>
+            <li><a href="notes/index.html">Notes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:houyi.leo@example.com">Email</a></li>
+            <li><a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">Resume</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-            // Function to render articles
-            function renderArticles(sortedArticles) {
-                const clickCounts = getClickCounts();
-                container.innerHTML = sortedArticles.map((item) => `
-                    <article class="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col md:flex-row gap-4 md:items-center" data-id="${item.id}">
-                        <a href="article.html?id=${item.id}" class="flex-shrink-0 article-link">
-                            <img src="${item.imageUrl}" alt="${item.title}" class="w-full md:w-56 h-36 object-cover rounded-md" />
-                        </a>
-                        <div>
-                            <p class="text-sm text-gray-400">${item.date} &bull; ${clickCounts[item.id] || 0} views</p>
-                            <h3 class="text-2xl font-bold text-cyan-400 mt-1"><a href="article.html?id=${item.id}" class="article-link">${item.title}</a></h3>
-                            <p class="text-gray-300 mt-2">${item.summary}</p>
-                        </div>
-                    </article>
-                `).join('');
-            }
+  <script>
+    const fallbackImage = 'https://www.figma.com/api/mcp/asset/4db08436-dea6-4fd4-b7c4-39674282dcaa';
 
-            // Function to sort and render articles
-            function sortAndRender() {
-                const sortBy = sortBySelect.value;
-                const clickCounts = getClickCounts();
-                let sortedArticles = [...articles];
+    function formatDate(value) {
+      return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
 
-                if (sortBy === 'date') {
-                    sortedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-                } else if (sortBy === 'clicks') {
-                    sortedArticles.sort((a, b) => (clickCounts[b.id] || 0) - (clickCounts[a.id] || 0));
-                }
+    async function loadPerspectives() {
+      const featured = document.getElementById('featured');
+      const grid = document.getElementById('article-grid');
 
-                renderArticles(sortedArticles);
-            }
+      try {
+        const response = await fetch('perspectives/articles.json');
+        const articles = await response.json();
+        const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            // --- Initial Load ---
-            try {
-                const response = await fetch('perspectives/articles.json');
-                articles = await response.json();
-                sortAndRender(); // Initial render based on default sort (date)
-            } catch (error) {
-                console.error("Failed to load perspectives:", error);
-                container.innerHTML = '<p class="text-center text-red-500">Failed to load articles. Please check the console for details.</p>';
-            }
+        if (sorted.length === 0) {
+          featured.innerHTML = '<p>No articles available.</p>';
+          return;
+        }
 
-            // Event listener for sorting
-            sortBySelect.addEventListener('change', sortAndRender);
+        const [latest, ...others] = sorted;
 
-            // Event listener for click tracking
-            container.addEventListener('click', function(e) {
-                const link = e.target.closest('.article-link');
-                if (link) {
-                    const articleElement = link.closest('article');
-                    const articleId = articleElement.dataset.id;
-                    if (articleId) {
-                        const clickCounts = getClickCounts();
-                        clickCounts[articleId] = (clickCounts[articleId] || 0) + 1;
-                        saveClickCounts(clickCounts);
-                    }
-                }
-            });
-        });
-    </script>
+        featured.innerHTML = `
+          <a href="article.html?id=${latest.id}">
+            <img src="${latest.imageUrl}" alt="${latest.title}" onerror="this.src='${fallbackImage}'">
+          </a>
+          <div>
+            <p class="meta">${formatDate(latest.date)}</p>
+            <h1><a href="article.html?id=${latest.id}">${latest.title}</a></h1>
+            <p class="page-subtitle" style="margin-top:18px;">${latest.summary}</p>
+          </div>
+        `;
+
+        grid.innerHTML = others.map((article) => `
+          <article class="card">
+            <a href="article.html?id=${article.id}">
+              <img src="${article.imageUrl}" alt="${article.title}" onerror="this.src='${fallbackImage}'" style="aspect-ratio:404/346;">
+            </a>
+            <div>
+              <h3><a href="article.html?id=${article.id}">${article.title}</a></h3>
+              <p>${formatDate(article.date)}</p>
+              <p>${article.summary}</p>
+            </div>
+          </article>
+        `).join('');
+      } catch (error) {
+        featured.innerHTML = '<p>Unable to load featured article.</p>';
+        grid.innerHTML = '<p>Unable to load article list.</p>';
+      }
+    }
+
+    loadPerspectives();
+  </script>
 </body>
 </html>

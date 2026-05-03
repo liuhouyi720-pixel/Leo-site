@@ -1,167 +1,154 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article - Leo's Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
-    <link rel="stylesheet" href="notes/notes.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-        }
-        .nav-link {
-            position: relative;
-            color: #495057;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #007bff;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover, .nav-link.active {
-            color: #007bff;
-        }
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-        .prose {
-            max-width: 800px;
-            margin: auto;
-            padding: 2rem;
-        }
-        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-            color: #212529;
-        }
-        .prose p, .prose ul, .prose ol, .prose blockquote {
-            color: #495057;
-        }
-        .prose a {
-            color: #007bff;
-        }
-        .prose code {
-            color: #e83e8c;
-            background-color: #f8f9fa;
-            padding: 0.2em 0.4em;
-            margin: 0;
-            font-size: 85%;
-            border-radius: 3px;
-            border: 1px solid #dee2e6;
-        }
-        .prose pre {
-            background-color: #212529;
-            color: #f8f9fa;
-            padding: 1em;
-            border-radius: 5px;
-        }
-        .prose pre code {
-            padding: 0;
-            margin: 0;
-            font-size: inherit;
-            color: inherit;
-            background-color: transparent;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article | Leo's Site</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 </head>
-<body class="antialiased">
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">Leo's Site</a>
+      <nav class="nav-links">
+        <a href="who-am-i.html">About</a>
+        <a href="my-experience.html">Experience</a>
+        <a href="my-observations.html">Observations</a>
+        <a href="perspectives.html">Perspectives</a>
+        <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Global Sticky Navigation -->
-    <header class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="text-2xl font-bold text-gray-800"><a href="index.html">Leo</a></div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="who-am-i.html" class="nav-link">Who Am I</a>
-                    <a href="my-experience.html" class="nav-link">My Experience</a>
-                    <a href="my-observations.html" class="nav-link">My Observations</a>
-                    <a href="perspectives.html" class="nav-link">Perspectives</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <main class="container page-main article-layout">
+    <section class="article-head">
+      <h1 id="article-title">Article title</h1>
+      <p id="article-subtitle">Subheading that sets up context and helps readers enter the story.</p>
+    </section>
 
-    <!-- Page Content -->
-    <main class="max-w-4xl mx-auto py-16 px-4">
-        <header>
-            <h1 id="article-title"></h1>
-        </header>
-        <div class="container prose" id="article-content"></div>
-    </main>
+    <section class="article-lead-image">
+      <img id="article-image" src="https://www.figma.com/api/mcp/asset/5e849b28-52e6-4c37-a5af-48dc2a536dd8" alt="Article lead image">
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const articleId = urlParams.get('id');
-            
-            // Function to get click counts from localStorage
-            function getClickCounts() {
-                const clicks = localStorage.getItem('article_clicks');
-                return clicks ? JSON.parse(clicks) : {};
-            }
+    <section id="article-content" class="article-content"></section>
 
-            // Function to save click counts to localStorage
-            function saveClickCounts(clicks) {
-                localStorage.setItem('article_clicks', JSON.stringify(clicks));
-            }
+    <section class="duo section">
+      <img src="https://www.figma.com/api/mcp/asset/4db08436-dea6-4fd4-b7c4-39674282dcaa" alt="Gallery image 1">
+      <img src="https://www.figma.com/api/mcp/asset/5cb44582-efe0-47c1-af78-bbdb80c11f56" alt="Gallery image 2">
+    </section>
 
-            // Function to increment click count
-            function incrementClickCount(articleId) {
-                const clickCounts = getClickCounts();
-                clickCounts[articleId] = (clickCounts[articleId] || 0) + 1;
-                saveClickCounts(clickCounts);
-            }
+    <section class="section">
+      <h2 style="font-size:40px;">Related articles or posts</h2>
+      <div id="related-grid" class="related-grid"></div>
+    </section>
+  </main>
 
-            if (!articleId) {
-                document.getElementById('article-content').innerHTML = '<p>Article not found.</p>';
-                return;
-            }
+  <footer class="footer section">
+    <div class="container">
+      <div class="top-line"></div>
+      <div class="footer-main">
+        <div>
+          <div class="brand" style="color:#222;">Leo's Site</div>
+          <div class="socials">
+            <a class="social" href="https://www.linkedin.com/in/houyi-liu-leo" target="_blank" rel="noopener">in</a>
+            <a class="social" href="perspectives.html">P</a>
+            <a class="social" href="mailto:houyi.leo@example.com">@</a>
+            <a class="social" href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">CV</a>
+          </div>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="who-am-i.html">About</a></li>
+            <li><a href="my-experience.html">Experience</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Writing</h4>
+          <ul>
+            <li><a href="perspectives.html">Perspectives</a></li>
+            <li><a href="notes/index.html">Notes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:houyi.leo@example.com">Email</a></li>
+            <li><a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">Resume</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-            try {
-                const response = await fetch('perspectives/articles.json');
-                const articles = await response.json();
-                const article = articles.find(a => a.id === articleId);
+  <script>
+    const fallbackImage = 'https://www.figma.com/api/mcp/asset/803cdd56-aa8e-4edf-abdb-2ec8ebf168c6';
 
-                if (!article) {
-                    document.getElementById('article-content').innerHTML = '<p>Article not found.</p>';
-                    return;
-                }
+    function formatDate(value) {
+      return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
 
-                // Increment click count when the article is loaded
-                incrementClickCount(article.id);
+    function stripFrontMatter(markdown) {
+      return markdown.replace(/^---[\s\S]*?---/, '').trim();
+    }
 
-                document.getElementById('article-title').textContent = article.title;
-                document.title = article.title;
+    async function loadArticle() {
+      const params = new URLSearchParams(window.location.search);
+      const articleId = params.get('id');
 
-                const mdResponse = await fetch(article.markdownFile);
-                const markdown = await mdResponse.text();
-                
-                const converter = new showdown.Converter();
-                const html = converter.makeHtml(markdown);
-                
-                document.getElementById('article-content').innerHTML = html;
+      const titleEl = document.getElementById('article-title');
+      const subtitleEl = document.getElementById('article-subtitle');
+      const imageEl = document.getElementById('article-image');
+      const contentEl = document.getElementById('article-content');
+      const relatedEl = document.getElementById('related-grid');
 
-            } catch (error) {
-                console.error("Error loading article:", error);
-                document.getElementById('article-content').innerHTML = '<p>Error loading article.</p>';
-            }
-        });
-    </script>
+      try {
+        const metaRes = await fetch('perspectives/articles.json');
+        const articles = await metaRes.json();
+
+        const selected = articles.find((article) => article.id === articleId) || articles[0];
+        if (!selected) {
+          titleEl.textContent = 'Article not found';
+          subtitleEl.textContent = 'No article metadata is available.';
+          return;
+        }
+
+        document.title = `${selected.title} | Leo's Site`;
+        titleEl.textContent = selected.title;
+        subtitleEl.textContent = `${formatDate(selected.date)} - ${selected.summary}`;
+        imageEl.src = selected.imageUrl;
+        imageEl.alt = selected.title;
+        imageEl.onerror = () => { imageEl.src = fallbackImage; };
+
+        try {
+          const markdownRes = await fetch(selected.markdownFile);
+          const markdown = await markdownRes.text();
+          const converter = new showdown.Converter({ tables: true, strikethrough: true, tasklists: true });
+          contentEl.innerHTML = converter.makeHtml(stripFrontMatter(markdown));
+        } catch (error) {
+          contentEl.innerHTML = '<p>Unable to load the markdown content for this article.</p>';
+        }
+
+        const related = articles.filter((article) => article.id !== selected.id).slice(0, 3);
+        relatedEl.innerHTML = related.map((article) => `
+          <article class="related-card">
+            <a href="article.html?id=${article.id}">
+              <img src="${article.imageUrl}" alt="${article.title}" onerror="this.src='${fallbackImage}'">
+            </a>
+            <h3><a href="article.html?id=${article.id}">${article.title}</a></h3>
+            <p>${formatDate(article.date)}</p>
+          </article>
+        `).join('');
+      } catch (error) {
+        titleEl.textContent = 'Error loading article';
+        subtitleEl.textContent = 'Please try again later.';
+        contentEl.innerHTML = '<p>Failed to load article data.</p>';
+      }
+    }
+
+    loadArticle();
+  </script>
 </body>
 </html>
