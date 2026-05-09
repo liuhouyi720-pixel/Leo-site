@@ -2,16 +2,17 @@
   {
     "title": "Life in the Alps",
     "summary": "A visual journey through the serene landscapes of the Alps.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/75900abe-b385-4917-8c28-3c067ce0d46e"
+    "imageUrl": "perspectives/images/silicon-valley-fire-1.jpg"
   },
   {
     "title": "Urban Exploration",
     "summary": "Discovering the hidden gems of metropolitan cities.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/e03f7b36-c14e-405a-a093-94a32f495e3a"
+    "imageUrl": "perspectives/images/silicon-valley-fire-2.jpg"
   },
   {
     "title": "Architectural Marvels",
     "summary": "A collection of impressive architectural designs from around the world.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/a6683a60-d71c-423a-8701-54548b369e55"
+    "imageUrl": "perspectives/images/silicon-valley-fire-2.jpg"
   }
 ]
+

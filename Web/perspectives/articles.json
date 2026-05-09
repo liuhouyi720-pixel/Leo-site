@@ -12,7 +12,7 @@
     "title": "Philosophy and AI",
     "date": "2026-02-10",
     "summary": "A reflection on how AI systems reshape the way we define reasoning, judgment, and responsibility.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/0baeba9f-2393-401f-82d2-689c8bddefcb",
+    "imageUrl": "perspectives/images/silicon-valley-fire-2.jpg",
     "markdownFile": "perspectives/philosophy-ai.md"
   },
   {
@@ -20,7 +20,7 @@
     "title": "Macro-trends in Tech Consulting",
     "date": "2026-01-18",
     "summary": "An outlook on consulting models that blend analytics, workflow automation, and applied AI governance.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/1fb07b16-32ce-470c-8ac7-b0cb6e8a414a",
+    "imageUrl": "perspectives/images/silicon-valley-fire-3.jpg",
     "markdownFile": "perspectives/tech-consulting.md"
   },
   {
@@ -28,8 +28,9 @@
     "title": "MSBA Learning Notes",
     "date": "2025-12-02",
     "summary": "How coursework in statistics and product thinking can be translated into practical project delivery.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/5cb44582-efe0-47c1-af78-bbdb80c11f56",
+    "imageUrl": "perspectives/images/silicon-valley-fire-3.jpg",
     "markdownFile": "perspectives/msba-notes.md"
   }
 ]
+
 
