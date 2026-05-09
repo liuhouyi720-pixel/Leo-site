@@ -16,12 +16,12 @@
     "markdownFile": "perspectives/philosophy-ai.md"
   },
   {
-    "id": "tech-consulting",
-    "title": "Macro-trends in Tech Consulting",
-    "date": "2026-01-18",
-    "summary": "An outlook on consulting models that blend analytics, workflow automation, and applied AI governance.",
-    "imageUrl": "perspectives/images/silicon-valley-fire-3.jpg",
-    "markdownFile": "perspectives/tech-consulting.md"
+    "id": "Thoughts-about-Chicago-and-the-Rust-belt",
+    "title": "Thoughts about Chicago and the Rust belt",
+    "date": "2026-05-09",
+    "summary": "When I back to Chicago I feel it.",
+    "imageUrl": "perspectives/images/Chicago-1.jpg",
+    "markdownFile": "perspectives/Thoughts-about-Chicago-and-the-Rust-belt.md"
   },
   {
     "id": "msba-notes",
