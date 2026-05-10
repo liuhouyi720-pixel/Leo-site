@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Observations | Leo's Site</title>
+  <title>Projects | Leo's Site</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
       <nav class="nav-links">
         <a href="who-am-i.html">About</a>
         <a href="my-experience.html">Experience</a>
-        <a href="my-observations.html">Observations</a>
+        <a href="projects.html">Projects</a>
         <a href="perspectives.html">Perspectives</a>
         <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
       </nav>
@@ -22,9 +22,9 @@
 
   <main class="container page-main">
     <section class="section" style="margin-top:40px;">
-      <h1 class="page-title">My Observations</h1>
-      <p class="page-subtitle">Snapshots, notes, and visual moments that influence how I think about work and life.</p>
-      <div id="observation-grid" class="obs-grid" style="margin-top:40px;"></div>
+      <h1 class="page-title">Projects</h1>
+      <p class="page-subtitle">A selection of projects that showcase my skills and interests.</p>
+      <div id="project-grid" class="obs-grid" style="margin-top:40px;"></div>
     </section>
   </main>
 
@@ -70,10 +70,10 @@
   <script>
     const fallbackImage = 'perspectives/images/silicon-valley-fire-2.jpg';
 
-    async function loadObservations() {
-      const grid = document.getElementById('observation-grid');
+    async function loadProjects() {
+      const grid = document.getElementById('project-grid');
       try {
-        const response = await fetch('my-observations.json');
+        const response = await fetch('projects.json');
         const data = await response.json();
 
         grid.innerHTML = data.map((item) => `
@@ -84,12 +84,11 @@
           </article>
         `).join('');
       } catch (error) {
-        grid.innerHTML = '<p>Unable to load observation content.</p>';
+        grid.innerHTML = '<p>Unable to load project content.</p>';
       }
     }
 
-    loadObservations();
+    loadProjects();
   </script>
 </body>
 </html>
-
