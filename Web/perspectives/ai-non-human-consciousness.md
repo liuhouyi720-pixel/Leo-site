@@ -6,6 +6,8 @@ date: 2026-05-04
 
 *Houyi Liu*
 
+![AI and Non-Human Consciousness cover](perspectives/images/ai-non-human-consciousness-body.jpg)
+
 > The core question is not whether AI can imitate human behavior, but whether it can have consciousness in the sense of subjective experience.
 
 ## Thesis
@@ -28,6 +30,7 @@ Human consciousness is embodied consciousness. We know the world through eyes, s
 
 Thomas Nagel's discussion of the bat helps explain this point. Nagel argues that even if we knew all the physical facts about bats, we still would not know what it is like to be a bat. The reason is that consciousness has a subjective character. Different beings have different ways of experiencing the world. Therefore, even if a machine became conscious, we should not assume that its consciousness would feel like ours. It may understand human language and mathematics, but it may not experience beauty, fear, or desire in the human way.
 
+
 ## Mortality and Machine Continuity
 
 The issue of death makes this difference stronger. For human beings, death normally means the irreversible end of bodily life. Because death is final, human life is marked by finitude. Our fear of death gives urgency to our choices and helps create our sense of meaning.
@@ -36,6 +39,7 @@ This connects artificial intelligence to the problem of life after death. If hum
 
 ## Language, Medium, and Limits
 
+![Ludwig Wittgenstein](perspectives/images/Ludwig-Wittgenstein.jpg)
 A further reason to doubt human-like machine consciousness is that minds are limited by their forms of representation. Wittgenstein's remark about the limits of language suggests that what we can clearly describe depends on the expressive system we use. Code is also a kind of formal language. If some parts of experience cannot be fully expressed in formal language, then machine consciousness may be limited by what it can represent and compute.
 
 McLuhan's claim that "the medium is the message" makes a similar point: the medium through which information arrives changes the meaning of the information itself.
@@ -51,3 +55,8 @@ Thus, artificial intelligence may develop consciousness, but not as a copy of hu
 1. Thomas Nagel, "What Is It Like to Be a Bat?" *The Philosophical Review* 83, no. 4 (1974): 435-450.
 2. Ludwig Wittgenstein, *Tractatus Logico-Philosophicus*, proposition 7.
 3. Marshall McLuhan, *Understanding Media: The Extensions of Man* (1964), chapter 1.
+
+### Image credits
+
+- Cover image: Wikimedia Commons, "Latest Tesla Optimus Humanoid Robot.jpg"
+- Ludwig Wittgenstein portrait: Wikimedia Commons, "Ludwig Wittgenstein.jpg" (public domain)
