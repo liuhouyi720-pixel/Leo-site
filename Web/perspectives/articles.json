@@ -1,5 +1,13 @@
 [
   {
+    "id": "ai-non-human-consciousness",
+    "title": "Artificial Intelligence and Non-Human Consciousness",
+    "date": "2026-05-04",
+    "summary": "AI may eventually develop machine-specific consciousness, but not human consciousness shaped by embodiment, biological drives, and mortality.",
+    "imageUrl": "perspectives/images/silicon-valley-fire-1.jpg",
+    "markdownFile": "perspectives/ai-non-human-consciousness.md"
+  },
+  {
     "id": "fire-from-silicon-valley",
     "title": "Fire from Silicon Valley",
     "date": "2026-03-04",
@@ -32,5 +40,3 @@
     "markdownFile": "perspectives/msba-notes.md"
   }
 ]
-
-
