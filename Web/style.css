@@ -195,6 +195,24 @@ img {
   gap: 32px;
 }
 
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.grid-4 .card h3 {
+  font-size: 20px;
+}
+
+.grid-4 .card p {
+  font-size: 16px;
+}
+
+.grid-4 .card {
+  gap: 16px;
+}
+
 .card {
   display: flex;
   flex-direction: column;
