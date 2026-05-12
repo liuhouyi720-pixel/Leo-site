@@ -20,11 +20,41 @@
     </div>
   </header>
 
-  <main class="container page-main">
-    <section class="section" style="margin-top:40px;">
+  <main class="container page-main projects-main">
+    <section class="section projects-hero reveal-on-scroll" style="margin-top:40px;">
+      <p class="projects-eyebrow">Projects Hub</p>
       <h1 class="page-title">Projects</h1>
-      <p class="page-subtitle">A selection of projects that showcase my skills and interests.</p>
-      <div id="project-grid" class="obs-grid" style="margin-top:40px;"></div>
+      <p class="page-subtitle">A category-agnostic project system with reusable cards, teaching-style explanations, and source-linked artifacts.</p>
+    </section>
+
+    <section class="section projects-filter reveal-on-scroll">
+      <div class="section-head">
+        <h2>Filter by Tag</h2>
+        <p>Use tags to quickly switch across methods, topics, and future non-ML projects.</p>
+      </div>
+      <div id="tag-filter" class="tag-filter" aria-label="Project tag filters"></div>
+    </section>
+
+    <section id="featured-cluster-section" class="section reveal-on-scroll">
+      <div class="section-head">
+        <h2 id="featured-cluster-title">Featured Cluster</h2>
+        <p id="featured-cluster-subtitle">Current spotlight for deep-dive project storytelling.</p>
+      </div>
+      <div id="featured-cluster-grid" class="project-stack"></div>
+    </section>
+
+    <section class="section reveal-on-scroll">
+      <div class="section-head">
+        <h2>All Projects</h2>
+        <p>Compact stream for scanning every project entry from the same data source.</p>
+      </div>
+      <div id="all-projects-grid" class="registry-grid"></div>
+    </section>
+
+    <section class="section reflection-block reveal-on-scroll">
+      <h2>Cross-Project Reflection</h2>
+      <p id="reflection-summary" class="reflection-summary">Reflection will appear after project data is loaded.</p>
+      <div id="reflection-points" class="reflection-points"></div>
     </section>
   </main>
 
@@ -67,28 +97,6 @@
     </div>
   </footer>
 
-  <script>
-    const fallbackImage = 'perspectives/images/silicon-valley-fire-2.jpg';
-
-    async function loadProjects() {
-      const grid = document.getElementById('project-grid');
-      try {
-        const response = await fetch('projects.json');
-        const data = await response.json();
-
-        grid.innerHTML = data.map((item) => `
-          <article class="obs-card">
-            <img src="${item.imageUrl}" alt="${item.title}" onerror="this.src='${fallbackImage}'">
-            <h3>${item.title}</h3>
-            <p>${item.summary}</p>
-          </article>
-        `).join('');
-      } catch (error) {
-        grid.innerHTML = '<p>Unable to load project content.</p>';
-      }
-    }
-
-    loadProjects();
-  </script>
+  <script src="projects-hub.js"></script>
 </body>
 </html>

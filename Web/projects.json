@@ -1,17 +1,253 @@
 [
   {
-    "title": "Life in the Alps",
-    "summary": "A visual journey through the serene landscapes of the Alps.",
-    "imageUrl": "perspectives/images/silicon-valley-fire-1.jpg"
+    "id": "carbon-tax-rate-prediction",
+    "title": "Carbon Tax Rate Prediction for China",
+    "subtitle": "XGBoost with K-means similarity weighting and SHAP interpretation",
+    "date": "2025-06-04",
+    "tags": ["Machine Learning", "Data Analytics", "Policy Modeling", "Experiment"],
+    "status": "Completed",
+    "featuredCluster": "Machine Learning Labs",
+    "oneLiner": "A dual-objective policy model that estimates a carbon-tax range balancing emissions reduction and economic stability.",
+    "problem": "How can a future carbon-tax policy reduce emissions without creating unacceptable pressure on GDP growth?",
+    "approach": "I built a dual-response regression pipeline with XGBoost, predicting both GDP growth impact and carbon-intensity reduction. To reduce country-level heterogeneity, I used K-means to find samples structurally closer to China and up-weighted them during training.",
+    "results": "Under the project constraints (carbon intensity reduction above 4 percent and GDP growth above 2 percent), the recommended range is 30-40 USD per ton CO2, with 35 USD as the center recommendation.",
+    "meaning": "This work shows how machine learning can complement macro policy analysis by turning high-level climate goals into a testable decision interval.",
+    "metrics": [
+      {
+        "label": "Recommended Tax Range",
+        "value": "30-40 USD/tCO2",
+        "note": "Policy-feasible interval under dual constraints"
+      },
+      {
+        "label": "Center Recommendation",
+        "value": "35 USD/tCO2",
+        "note": "Balanced point between growth and abatement"
+      },
+      {
+        "label": "Model Targets",
+        "value": "2 Outputs",
+        "note": "GDP-growth effect and carbon-intensity effect"
+      }
+    ],
+    "methods": [
+      {
+        "name": "XGBoost",
+        "explain": "Gradient-boosted decision trees used for nonlinear regression with strong tabular performance."
+      },
+      {
+        "name": "K-means Weighting",
+        "explain": "Countries close to China in feature space were weighted higher to improve relevance."
+      },
+      {
+        "name": "SHAP",
+        "explain": "Feature-attribution analysis used to explain marginal and interaction effects."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "XGBoost",
+        "explain": "A boosted-tree algorithm that fits complex nonlinear relations with regularization."
+      },
+      {
+        "term": "SHAP",
+        "explain": "A game-theoretic attribution method showing how each feature contributes to predictions."
+      },
+      {
+        "term": "Dual-Objective Modeling",
+        "explain": "Simultaneously modeling economic and environmental outcomes for policy design."
+      }
+    ],
+    "figures": [
+      {
+        "src": "image/projects/carbon-tax-rate-prediction/carbon-tax-rate-prediction-fig-01.png",
+        "caption": "Dual-effect prediction curves: GDP-side and carbon-intensity-side responses.",
+        "source": "Original report figure"
+      },
+      {
+        "src": "image/projects/carbon-tax-rate-prediction/carbon-tax-rate-prediction-fig-02.png",
+        "caption": "SHAP analysis highlights key variables and nonlinear policy response patterns.",
+        "source": "Original report figure"
+      },
+      {
+        "src": "image/projects/carbon-tax-rate-prediction/carbon-tax-rate-prediction-fig-03.png",
+        "caption": "Model output summary used to identify the feasible tax corridor.",
+        "source": "Original report figure"
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Open Source Report (DOCX)",
+        "path": "projects/reports/carbon-tax-rate-prediction.docx"
+      }
+    ]
   },
   {
-    "title": "Urban Exploration",
-    "summary": "Discovering the hidden gems of metropolitan cities.",
-    "imageUrl": "perspectives/images/silicon-valley-fire-2.jpg"
+    "id": "kmeans-mnist-digit-recognition",
+    "title": "K-means MNIST Digit Recognition",
+    "subtitle": "Unsupervised digit clustering with initialization strategy comparison",
+    "date": "2025-03-21",
+    "tags": ["Machine Learning", "Computer Vision", "Data Analytics", "Experiment"],
+    "status": "Completed",
+    "featuredCluster": "Machine Learning Labs",
+    "oneLiner": "A no-label recognition experiment that tests how far classical clustering can go on handwritten digits.",
+    "problem": "Can an unsupervised clustering algorithm separate handwritten digits effectively without using labels during training?",
+    "approach": "I ran K-means on MNIST with K=10 and compared Random initialization, K-means++, and Density-based initialization. Evaluation used Accuracy (post-label alignment), Silhouette Score, and ARI, plus convergence behavior under different iteration budgets.",
+    "results": "Random and Density initialization reached around 0.59 accuracy, while K-means++ reached about 0.58. Density achieved stronger structure metrics (Silhouette around 0.071 and ARI around 0.412) but required more runtime.",
+    "meaning": "The project clarifies a practical tradeoff: initialization can improve cluster quality, but better structure does not always mean lower runtime.",
+    "metrics": [
+      {
+        "label": "Best Accuracy",
+        "value": "0.59",
+        "note": "Random and Density initialization in this setup"
+      },
+      {
+        "label": "Best Silhouette",
+        "value": "0.071",
+        "note": "Density initialization"
+      },
+      {
+        "label": "Best ARI",
+        "value": "0.412",
+        "note": "Density initialization"
+      },
+      {
+        "label": "Fastest Runtime",
+        "value": "13.96 s",
+        "note": "K-means++ in this setup"
+      }
+    ],
+    "methods": [
+      {
+        "name": "K-means",
+        "explain": "Iteratively updates centroids to minimize within-cluster distance."
+      },
+      {
+        "name": "Initialization Study",
+        "explain": "Random, K-means++, and Density seeds were compared for quality and speed."
+      },
+      {
+        "name": "Post-hoc Label Mapping",
+        "explain": "Cluster ids were mapped to digit labels for fair accuracy estimation."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "Silhouette Score",
+        "explain": "Measures cohesion and separation of clusters; higher usually indicates cleaner grouping."
+      },
+      {
+        "term": "ARI",
+        "explain": "Adjusted Rand Index; compares predicted clusters to ground-truth labels while correcting chance."
+      },
+      {
+        "term": "Initialization",
+        "explain": "How starting centroids are chosen; often critical for final K-means performance."
+      }
+    ],
+    "figures": [
+      {
+        "src": "image/projects/kmeans-mnist-digit-recognition/kmeans-mnist-digit-recognition-fig-01.png",
+        "caption": "Comparative experiment outputs across initialization strategies.",
+        "source": "Original report figure"
+      },
+      {
+        "src": "image/projects/kmeans-mnist-digit-recognition/kmeans-mnist-digit-recognition-fig-02.png",
+        "caption": "Metric table and runtime comparison for Random, K-means++, and Density settings.",
+        "source": "Original report figure"
+      },
+      {
+        "src": "image/projects/kmeans-mnist-digit-recognition/kmeans-mnist-digit-recognition-fig-04.png",
+        "caption": "Visual evidence of clustering behavior and error modes on handwritten digits.",
+        "source": "Original report figure"
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Open Source Report (PDF)",
+        "path": "projects/reports/kmeans-mnist-digit-recognition.pdf"
+      }
+    ]
   },
   {
-    "title": "Architectural Marvels",
-    "summary": "A collection of impressive architectural designs from around the world.",
-    "imageUrl": "perspectives/images/silicon-valley-fire-2.jpg"
+    "id": "ensemble-learning-amazon-reviews",
+    "title": "Ensemble Learning on Amazon Reviews",
+    "subtitle": "TF-IDF text representation with SVM/Tree and Bagging/AdaBoost combinations",
+    "date": "2025-04-08",
+    "tags": ["Machine Learning", "NLP", "Data Analytics", "Experiment"],
+    "status": "Completed",
+    "featuredCluster": "Machine Learning Labs",
+    "oneLiner": "A structured comparison of ensemble strategies for text-based rating prediction under sparse high-dimensional features.",
+    "problem": "How should we combine classical text models and ensemble methods to improve rating prediction from Amazon review text?",
+    "approach": "I converted reviews into TF-IDF vectors and evaluated four combinations: SVM + Bagging, Tree + Bagging, SVM + AdaBoost, and Tree + AdaBoost. The analysis focused on error behavior (MAE/RMSE), stability, and computational tradeoffs.",
+    "results": "The experiment confirmed expected bias-variance behavior: Bagging helps unstable learners like trees, while boosting can focus on difficult samples but is more sensitive to noise and compute cost when paired with strong base models.",
+    "meaning": "For readers beyond ML, this project demonstrates that model performance is not just about one algorithm choice, but also about how data representation and ensemble strategy interact.",
+    "metrics": [
+      {
+        "label": "Model Families",
+        "value": "4 Combinations",
+        "note": "SVM/Tree crossed with Bagging/AdaBoost"
+      },
+      {
+        "label": "Primary Error Metrics",
+        "value": "MAE + RMSE",
+        "note": "Used to track prediction deviation"
+      },
+      {
+        "label": "Feature Space",
+        "value": "TF-IDF",
+        "note": "Sparse weighted term representation"
+      }
+    ],
+    "methods": [
+      {
+        "name": "TF-IDF",
+        "explain": "Converts text into weighted term vectors emphasizing informative words."
+      },
+      {
+        "name": "Bagging",
+        "explain": "Reduces variance via bootstrap resampling and model aggregation."
+      },
+      {
+        "name": "AdaBoost",
+        "explain": "Iteratively reweights hard samples to reduce bias on difficult cases."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "Bagging",
+        "explain": "Bootstrap Aggregating; improves stability by averaging many resampled learners."
+      },
+      {
+        "term": "AdaBoost",
+        "explain": "Adaptive boosting that emphasizes misclassified examples over rounds."
+      },
+      {
+        "term": "TF-IDF",
+        "explain": "Term Frequency-Inverse Document Frequency; highlights words that are important in one document but not common everywhere."
+      }
+    ],
+    "figures": [
+      {
+        "src": "image/projects/ensemble-learning-amazon-reviews/ensemble-learning-amazon-reviews-fig-01.png",
+        "caption": "Comparison chart of ensemble configurations on review prediction.",
+        "source": "Original report figure"
+      },
+      {
+        "src": "image/projects/ensemble-learning-amazon-reviews/ensemble-learning-amazon-reviews-fig-02.png",
+        "caption": "Error and performance tradeoff illustration across model combinations.",
+        "source": "Original report figure"
+      },
+      {
+        "src": "image/projects/ensemble-learning-amazon-reviews/ensemble-learning-amazon-reviews-fig-03.png",
+        "caption": "Model behavior snapshot under shared TF-IDF feature conditions.",
+        "source": "Original report figure"
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Open Source Report (DOCX)",
+        "path": "projects/reports/ensemble-learning-amazon-reviews.docx"
+      }
+    ]
   }
 ]
