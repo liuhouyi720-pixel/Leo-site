@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perspectives | Leo's Site</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260512a">
 </head>
 <body>
   <header class="site-header">
@@ -145,7 +145,7 @@
       const viewMoreButton = document.getElementById('view-more-btn');
 
       try {
-        const response = await fetch('perspectives/articles.json');
+        const response = await fetch('perspectives/articles.json?v=20260512a', { cache: 'no-store' });
         const articles = await response.json();
         sortedArticles = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
         visibleCount = INITIAL_VISIBLE;
