@@ -114,6 +114,19 @@ img {
   inset: 0;
 }
 
+.hero-home-full {
+  min-height: calc(100vh - 164px);
+}
+
+.hero-home-full img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-home-full .hero-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.24));
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -1589,6 +1602,10 @@ img {
 
   .hero {
     min-height: 560px;
+  }
+
+  .hero-home-full {
+    min-height: 100vh;
   }
 
   .hero-copy {
