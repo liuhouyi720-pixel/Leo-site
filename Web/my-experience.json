@@ -1,23 +1,113 @@
-
 [
-    {
-        "title": "LLM Fine-tuning Experiments",
-        "date": "2026",
-        "summary": "Built small-scale experiments to compare prompt tuning and supervised fine-tuning for enterprise use cases."
-    },
-    {
-        "title": "ESG Data Consulting Due Diligence",
-        "date": "2025",
-        "summary": "Supported ESG data quality checks and reporting readiness during a consulting due diligence engagement."
-    },
-    {
-        "title": "Green M&A Research",
-        "date": "2024",
-        "summary": "Researched drivers behind high completion rates in performance commitments for green M&A cases."
-    },
-    {
-        "title": "Founded a Startup",
-        "date": "2023",
-        "summary": "Co-founded a tech startup focused on developing a new social networking platform."
-    }
+  {
+    "src": "image/Four of July.jpg",
+    "title": "Fourth of July",
+    "caption": "A bright summer frame where city lights and celebration energy meet.",
+    "alt": "Fourth of July scene with festive summer atmosphere",
+    "enabled": true
+  },
+  {
+    "src": "image/IMG_2191.jpg",
+    "caption": "A quiet street-level moment that felt worth keeping in one still image.",
+    "alt": "Street photo captured from a personal perspective",
+    "enabled": true
+  },
+  {
+    "src": "perspectives/images/ai-non-human-consciousness-body.jpg",
+    "title": "AI Non-Human Consciousness Body",
+    "caption": "A visual note from my writing process, focused on tension between logic and imagination.",
+    "alt": "Conceptual image used in the AI non-human consciousness article body",
+    "enabled": true
+  },
+  {
+    "src": "perspectives/images/ai-non-human-consciousness-cover.jpg",
+    "title": "AI Non-Human Consciousness Cover",
+    "caption": "A cover frame that sets a reflective tone before the article begins.",
+    "alt": "Cover image for AI non-human consciousness perspective essay",
+    "enabled": true
+  },
+  {
+    "src": "perspectives/images/Chicago-1.jpg",
+    "title": "Chicago 1",
+    "caption": "An urban slice of Chicago where architecture and weather shape the mood.",
+    "alt": "Chicago city scene with buildings and street atmosphere",
+    "enabled": true
+  },
+  {
+    "src": "perspectives/images/Chicago-2.jpg",
+    "title": "Chicago 2",
+    "caption": "Another Chicago frame capturing texture, depth, and a slower rhythm.",
+    "alt": "Second Chicago city view with layered urban composition",
+    "enabled": true
+  },
+  {
+    "src": "perspectives/images/Ludwig-Wittgenstein.jpg",
+    "title": "Ludwig Wittgenstein",
+    "caption": "A philosophical reference image that anchors one of my key writing threads.",
+    "alt": "Portrait of Ludwig Wittgenstein used as visual reference",
+    "enabled": true
+  },
+  {
+    "src": "perspectives/images/silicon-valley-fire-1.jpg",
+    "title": "Silicon Valley Fire 1",
+    "caption": "A dramatic frame that inspired my notes on fragility and change.",
+    "alt": "Fire-related image from Silicon Valley series, first frame",
+    "enabled": true
+  },
+  {
+    "src": "perspectives/images/silicon-valley-fire-2.jpg",
+    "title": "Silicon Valley Fire 2",
+    "caption": "A follow-up scene in the same series, with heavier contrast and tension.",
+    "alt": "Fire-related image from Silicon Valley series, second frame",
+    "enabled": true
+  },
+  {
+    "src": "perspectives/images/silicon-valley-fire-3.jpg",
+    "title": "Silicon Valley Fire 3",
+    "caption": "The closing frame of this series, balancing haze, light, and distance.",
+    "alt": "Fire-related image from Silicon Valley series, third frame",
+    "enabled": true
+  },
+  {
+    "src": "image/Griffith observatory LA.jpg",
+    "title": "Griffith Observatory LA",
+    "caption": "A Los Angeles frame centered on Griffith Observatory and the light around it.",
+    "alt": "View around Griffith Observatory in Los Angeles",
+    "enabled": true
+  },
+  {
+    "src": "image/Rainning Yosemite.jpg",
+    "title": "Raining Yosemite",
+    "caption": "A rainy Yosemite moment where mist and texture reshape the landscape.",
+    "alt": "Rainy scene captured in Yosemite",
+    "enabled": true
+  },
+  {
+    "src": "image/SpaceX rocket launch in CA (shot at LA).jpg",
+    "title": "SpaceX Rocket Launch in CA",
+    "caption": "A launch-day shot from Los Angeles, catching the sky trail and momentum.",
+    "alt": "SpaceX rocket launch captured from Los Angeles, California",
+    "enabled": true
+  },
+  {
+    "src": "image/Sunrise in NYC (view from my room).jpg",
+    "title": "Sunrise in NYC",
+    "caption": "An early-morning New York skyline view captured directly from my room.",
+    "alt": "Sunrise over New York City viewed from a room window",
+    "enabled": true
+  },
+  {
+    "src": "image/Sunset in Princeton.jpg",
+    "title": "Sunset in Princeton",
+    "caption": "A warm Princeton sunset frame with calm color gradients across the sky.",
+    "alt": "Sunset scene in Princeton",
+    "enabled": true
+  },
+  {
+    "src": "image/Try to find the same location where our great leader stood at.jpg",
+    "title": "Same Location Revisited",
+    "caption": "A location revisit photo, matching a place once captured in a historic frame.",
+    "alt": "Photo revisiting a location connected to a historical reference",
+    "enabled": true
+  }
 ]

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perspectives | Leo's Site</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260512a">
 </head>
 <body>
   <header class="site-header">
@@ -13,7 +13,7 @@
       <nav class="nav-links">
         <a href="who-am-i.html">About</a>
         <a href="my-experience.html">Experience</a>
-        <a href="my-observations.html">Observations</a>
+        <a href="projects.html">Projects</a>
         <a href="perspectives.html">Perspectives</a>
         <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
       </nav>
@@ -21,11 +21,15 @@
   </header>
 
   <main class="container page-main">
-    <section id="featured" class="persp-feature"></section>
+    <section class="section perspectives-listing" style="margin-top:40px;">
+      <h1 class="page-title">Perspectives</h1>
+      <p class="page-subtitle">Latest reflections and essays.</p>
 
-    <section class="section" style="margin-top:90px;">
-      <h2>Past Articles</h2>
-      <div id="article-grid" class="grid-3"></div>
+      <div id="perspectives-grid" class="perspectives-grid" style="margin-top:40px;"></div>
+
+      <div class="perspectives-actions">
+        <button id="view-more-btn" class="perspectives-view-more" type="button">VIEW MORE ↓</button>
+      </div>
     </section>
   </main>
 
@@ -69,57 +73,90 @@
   </footer>
 
   <script>
-    const fallbackImage = 'https://www.figma.com/api/mcp/asset/4db08436-dea6-4fd4-b7c4-39674282dcaa';
+    const fallbackImage = 'perspectives/images/silicon-valley-fire-1.jpg';
+    const INITIAL_VISIBLE = 4;
+    const LOAD_MORE_STEP = 8;
+
+    let visibleCount = INITIAL_VISIBLE;
+    let sortedArticles = [];
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
 
     function formatDate(value) {
-      return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      return new Date(value).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }).toUpperCase();
+    }
+
+    function renderCards() {
+      const grid = document.getElementById('perspectives-grid');
+      const viewMoreButton = document.getElementById('view-more-btn');
+
+      if (sortedArticles.length === 0) {
+        grid.innerHTML = '<p class="perspectives-empty">No articles available.</p>';
+        viewMoreButton.hidden = true;
+        return;
+      }
+
+      const visibleArticles = sortedArticles.slice(0, visibleCount);
+
+      grid.innerHTML = visibleArticles.map((article) => `
+        <article class="perspective-card">
+          <a class="perspective-link" href="article.html?id=${encodeURIComponent(article.id)}" aria-label="${escapeHtml(article.title)}">
+            <img src="${escapeHtml(article.imageUrl)}" alt="${escapeHtml(article.title)}" onerror="this.src='${fallbackImage}'">
+            <span class="perspective-tag">ARTICLE</span>
+            <div class="perspective-panel">
+              <p class="perspective-meta">
+                <span>ARTICLE</span>
+                <span>${formatDate(article.date)}</span>
+              </p>
+              <h2>${escapeHtml(article.title)}</h2>
+              <p class="perspective-summary">${escapeHtml(article.summary)}</p>
+              <span class="perspective-cta" aria-hidden="true">LEARN MORE →</span>
+            </div>
+          </a>
+        </article>
+      `).join('');
+
+      const hasMore = visibleCount < sortedArticles.length;
+      viewMoreButton.hidden = !hasMore;
+      viewMoreButton.disabled = !hasMore;
+    }
+
+    function bindViewMore() {
+      const viewMoreButton = document.getElementById('view-more-btn');
+      viewMoreButton.addEventListener('click', () => {
+        visibleCount += LOAD_MORE_STEP;
+        renderCards();
+      });
     }
 
     async function loadPerspectives() {
-      const featured = document.getElementById('featured');
-      const grid = document.getElementById('article-grid');
+      const grid = document.getElementById('perspectives-grid');
+      const viewMoreButton = document.getElementById('view-more-btn');
 
       try {
-        const response = await fetch('perspectives/articles.json');
+        const response = await fetch('perspectives/articles.json?v=20260512a', { cache: 'no-store' });
         const articles = await response.json();
-        const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        if (sorted.length === 0) {
-          featured.innerHTML = '<p>No articles available.</p>';
-          return;
-        }
-
-        const [latest, ...others] = sorted;
-
-        featured.innerHTML = `
-          <a href="article.html?id=${latest.id}">
-            <img src="${latest.imageUrl}" alt="${latest.title}" onerror="this.src='${fallbackImage}'">
-          </a>
-          <div>
-            <p class="meta">${formatDate(latest.date)}</p>
-            <h1><a href="article.html?id=${latest.id}">${latest.title}</a></h1>
-            <p class="page-subtitle" style="margin-top:18px;">${latest.summary}</p>
-          </div>
-        `;
-
-        grid.innerHTML = others.map((article) => `
-          <article class="card">
-            <a href="article.html?id=${article.id}">
-              <img src="${article.imageUrl}" alt="${article.title}" onerror="this.src='${fallbackImage}'" style="aspect-ratio:404/346;">
-            </a>
-            <div>
-              <h3><a href="article.html?id=${article.id}">${article.title}</a></h3>
-              <p>${formatDate(article.date)}</p>
-              <p>${article.summary}</p>
-            </div>
-          </article>
-        `).join('');
+        sortedArticles = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
+        visibleCount = INITIAL_VISIBLE;
+        renderCards();
       } catch (error) {
-        featured.innerHTML = '<p>Unable to load featured article.</p>';
-        grid.innerHTML = '<p>Unable to load article list.</p>';
+        grid.innerHTML = '<p class="perspectives-empty">Unable to load article list.</p>';
+        viewMoreButton.hidden = true;
       }
     }
 
+    bindViewMore();
     loadPerspectives();
   </script>
 </body>

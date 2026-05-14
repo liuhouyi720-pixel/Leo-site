@@ -1,5 +1,13 @@
 [
   {
+    "id": "ai-non-human-consciousness",
+    "title": "Artificial Intelligence and Non-Human Consciousness",
+    "date": "2026-05-04",
+    "summary": "AI may eventually develop machine-specific consciousness, but not human consciousness shaped by embodiment, biological drives, and mortality.",
+    "imageUrl": "perspectives/images/ai-non-human-consciousness-cover.jpg",
+    "markdownFile": "perspectives/ai-non-human-consciousness.md"
+  },
+  {
     "id": "fire-from-silicon-valley",
     "title": "Fire from Silicon Valley",
     "date": "2026-03-04",
@@ -12,24 +20,23 @@
     "title": "Philosophy and AI",
     "date": "2026-02-10",
     "summary": "A reflection on how AI systems reshape the way we define reasoning, judgment, and responsibility.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/0baeba9f-2393-401f-82d2-689c8bddefcb",
+    "imageUrl": "perspectives/images/silicon-valley-fire-2.jpg",
     "markdownFile": "perspectives/philosophy-ai.md"
   },
   {
-    "id": "tech-consulting",
-    "title": "Macro-trends in Tech Consulting",
-    "date": "2026-01-18",
-    "summary": "An outlook on consulting models that blend analytics, workflow automation, and applied AI governance.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/1fb07b16-32ce-470c-8ac7-b0cb6e8a414a",
-    "markdownFile": "perspectives/tech-consulting.md"
+    "id": "Thoughts-about-Chicago-and-the-Rust-belt",
+    "title": "Thoughts about Chicago and the Rust belt",
+    "date": "2026-05-09",
+    "summary": "When I back to Chicago I feel it.",
+    "imageUrl": "perspectives/images/Chicago-1.jpg",
+    "markdownFile": "perspectives/Thoughts-about-Chicago-and-the-Rust-belt.md"
   },
   {
     "id": "msba-notes",
     "title": "MSBA Learning Notes",
     "date": "2025-12-02",
     "summary": "How coursework in statistics and product thinking can be translated into practical project delivery.",
-    "imageUrl": "https://www.figma.com/api/mcp/asset/5cb44582-efe0-47c1-af78-bbdb80c11f56",
+    "imageUrl": "perspectives/images/silicon-valley-fire-3.jpg",
     "markdownFile": "perspectives/msba-notes.md"
   }
 ]
-

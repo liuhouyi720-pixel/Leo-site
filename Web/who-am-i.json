@@ -1,15 +1,19 @@
 
 {
-    "title": "Who Am I",
-    "introduction": "A brief introduction about who I am, my journey, and my aspirations.",
-    "sections": [
-        {
-            "title": "My Journey",
-            "content": "Content about my journey will go here. This section can be expanded with more details about my personal and professional growth."
-        },
-        {
-            "title": "My Aspirations",
-            "content": "Content about my aspirations will go here. This section can detail my future goals and the impact I want to make."
-        }
-    ]
+  "title": "Who I Am",
+  "introduction": "I am Houyi (Leo) Liu, currently completing my BBA in Accounting at Baruch College (GPA 3.7/4.0) and preparing to start the M.S. in Business Analytics program at the University of Illinois Urbana-Champaign in Fall 2026.",
+  "sections": [
+    {
+      "title": "Academic Foundation",
+      "content": "My training combines accounting discipline with analytics thinking. At Baruch, I have focused on advanced accounting, taxation, auditing, and accounting information systems, while building practical skills in Excel, Python, SQL, and financial data tools. This cross-training helps me move from raw data to decision-ready insight with both technical and business context."
+    },
+    {
+      "title": "Internship & Project Experience",
+      "content": "I have worked across investment banking, equity research, and data quality operations. At J.P. Morgan Securities (China), I supported fintech M&A due diligence through company, regulatory, and financial research. At Huaxi Securities, I analyzed machinery-sector trends and built Excel-based data models for thematic reporting. At Vanho Securities, I contributed to a local government special bond deal by assisting feasibility analysis and due diligence. I also built a personal AI Cover Letter Assistant using OpenAI API, Ollama, and prompt workflows to automate drafting and PDF export."
+    },
+    {
+      "title": "What I Am Building Toward",
+      "content": "I am focused on becoming a practitioner who can bridge finance, analytics, and applied AI. In the next stage, I want to build decision tools that are rigorous, interpretable, and useful in real workflows, especially where research quality, execution speed, and communication clarity all matter."
+    }
+  ]
 }
