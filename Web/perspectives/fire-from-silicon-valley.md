@@ -7,7 +7,7 @@ date: 2026-03-04
  ![Silicon Valley Fire](perspectives/images/silicon-valley-fire-1.jpg)
 
 
-## **From Manhattan to the Valley: A Crossroads at 125th Street**
+## From Manhattan to the Valley: A Crossroads at 125th Street
 
 By chance, I attended an AI workshop at Columbia University last week. It left me with a whirlwind of emotions. On one hand, I was awestruck by the current success and future potential of AI; on the other, I found myself standing once again at a major crossroads in my life. I found myself questioning my judgment—wondering if this is just a fleeting whim, if my limited and perhaps shallow perspective can sustain such a grand dream, or if I can truly catch this massive AI wave.
 
