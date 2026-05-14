@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header hero-mode">
+  <header class="site-header">
     <div class="container">
       <a class="brand" href="index.html">Leo's Site</a>
       <nav class="nav-links">
@@ -21,57 +21,9 @@
   </header>
 
   <main class="page-main">
-    <section class="hero" style="border-radius:0; min-height:720px;">
-      <img src="perspectives/images/silicon-valley-fire-1.jpg" alt="Experience hero">
-      <div class="hero-overlay" style="background: rgba(0,0,0,0.24);"></div>
-      <div class="hero-copy" style="padding-top:284px; max-width:844px;">
-        <h1>My Experience</h1>
-        <p>Applied work across analytics, consulting, and AI product implementation.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#experience-cards">View Highlights</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="container exp-feature">
-      <div class="feature-copy">
-        <h3>From hypothesis to delivery</h3>
-        <p>I like translating uncertain problem statements into scoped deliverables, then shipping in fast feedback loops.</p>
-        <div class="hero-actions" style="justify-content:flex-start; margin-top:0;">
-          <a class="btn" href="perspectives.html">Related Writing</a>
-          <a class="btn-light" href="who-am-i.html">About Me</a>
-        </div>
-      </div>
-      <div class="feature-image">
-        <img src="perspectives/images/silicon-valley-fire-2.jpg" alt="Feature">
-      </div>
-    </section>
-
-    <section class="container exp-feature reverse">
-      <div class="feature-copy">
-        <h3>Execution with narrative clarity</h3>
-        <p>Every project becomes a story stakeholders can understand, with tradeoffs, metrics, and next actions clearly surfaced.</p>
-        <div class="hero-actions" style="justify-content:flex-start; margin-top:0;">
-          <a class="btn" href="Resume Houyi LIU.pdf" target="_blank" rel="noopener">Resume</a>
-          <a class="btn-light" href="who-am-i.html#contact-me">Contact</a>
-        </div>
-      </div>
-      <div class="feature-image">
-        <img src="perspectives/images/silicon-valley-fire-3.jpg" alt="Feature">
-      </div>
-    </section>
-
-    <section id="experience-cards" class="section container">
-      <h2>Selected Work</h2>
-      <div class="exp-products">
-        <article id="featured-work" class="mini-product"></article>
-        <div id="side-work" class="exp-side-cards"></div>
-      </div>
-    </section>
-
-    <section class="section container">
-      <h2>Approach</h2>
-      <div id="approach-list" class="list-2col"></div>
+    <section class="section container photo-gallery-wrap">
+      <h1 class="sr-only">Photo Gallery</h1>
+      <div id="photo-gallery" class="photo-gallery" aria-live="polite"></div>
     </section>
   </main>
 
@@ -115,53 +67,96 @@
   </footer>
 
   <script>
-    const fallbackImages = [
-      'perspectives/images/silicon-valley-fire-1.jpg',
-      'perspectives/images/silicon-valley-fire-2.jpg',
-      'perspectives/images/silicon-valley-fire-3.jpg'
-    ];
+    function humanizeFileName(filePath) {
+      const name = (filePath || '')
+        .split('/')
+        .pop()
+        .replace(/\.[^/.]+$/, '')
+        .replace(/[-_]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      if (!name) {
+        return 'Untitled Photo';
+      }
+
+      return name.replace(/\b\w/g, function capitalize(letter) {
+        return letter.toUpperCase();
+      });
+    }
+
+    function createGalleryCard(item) {
+      const title = item.title && item.title.trim() ? item.title.trim() : humanizeFileName(item.src);
+      const caption = item.caption && item.caption.trim() ? item.caption.trim() : 'A captured moment from my personal gallery.';
+      const alt = item.alt && item.alt.trim() ? item.alt.trim() : title;
+
+      const article = document.createElement('article');
+      article.className = 'gallery-card';
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'gallery-card-inner';
+      button.setAttribute('aria-pressed', 'false');
+      button.setAttribute('aria-label', 'Flip photo card');
+
+      const front = document.createElement('span');
+      front.className = 'gallery-face gallery-face-front';
+
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = alt;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      front.appendChild(img);
+
+      const back = document.createElement('span');
+      back.className = 'gallery-face gallery-face-back';
+
+      const heading = document.createElement('h2');
+      heading.textContent = title;
+
+      const paragraph = document.createElement('p');
+      paragraph.textContent = caption;
+
+      back.appendChild(heading);
+      back.appendChild(paragraph);
+
+      button.appendChild(front);
+      button.appendChild(back);
+      article.appendChild(button);
+
+      function toggleFlip() {
+        const isFlipped = button.classList.toggle('is-flipped');
+        button.setAttribute('aria-pressed', isFlipped ? 'true' : 'false');
+      }
+
+      button.addEventListener('click', toggleFlip);
+
+      return article;
+    }
 
     async function loadExperience() {
-      const featured = document.getElementById('featured-work');
-      const side = document.getElementById('side-work');
-      const approach = document.getElementById('approach-list');
+      const gallery = document.getElementById('photo-gallery');
 
       try {
         const response = await fetch('my-experience.json');
         const items = await response.json();
+        const photos = Array.isArray(items) ? items.filter(function filterEnabled(item) {
+          return item && item.src && item.enabled !== false;
+        }) : [];
 
-        if (!Array.isArray(items) || items.length === 0) {
-          featured.innerHTML = '<p>No experience items available.</p>';
+        if (photos.length === 0) {
+          gallery.innerHTML = '<p class="gallery-message">No photos available.</p>';
           return;
         }
 
-        const [first, ...rest] = items;
-
-        featured.innerHTML = `
-          <img src="${fallbackImages[0]}" alt="${first.title}" style="height:735px; width:100%; object-fit:cover; border-radius:8px;">
-          <h3 style="font-size:24px; margin:24px 0 4px;">${first.title}</h3>
-          <p>${first.summary}</p>
-          <strong>${first.date}</strong>
-        `;
-
-        side.innerHTML = rest.slice(0, 2).map((item, index) => `
-          <article class="mini-product">
-            <img src="${fallbackImages[index + 1]}" alt="${item.title}" style="height:283px; width:100%; object-fit:cover; border-radius:8px;">
-            <h3>${item.title}</h3>
-            <p>${item.summary}</p>
-            <strong>${item.date}</strong>
-          </article>
-        `).join('');
-
-        approach.innerHTML = items.slice(0, 4).map((item, index) => `
-          <article class="list-item">
-            <div class="icon">${index + 1}</div>
-            <h4>${item.title}</h4>
-            <p>${item.summary}</p>
-          </article>
-        `).join('');
+        const fragment = document.createDocumentFragment();
+        photos.forEach(function renderCard(photo) {
+          fragment.appendChild(createGalleryCard(photo));
+        });
+        gallery.appendChild(fragment);
       } catch (error) {
-        featured.innerHTML = '<p>Unable to load experience content.</p>';
+        gallery.innerHTML = '<p class="gallery-message">Unable to load photos.</p>';
       }
     }
 
