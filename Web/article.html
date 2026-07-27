@@ -33,7 +33,7 @@
 
     <section id="article-content" class="article-content"></section>
 
-    <section class="duo section">
+    <section id="article-gallery" class="duo section article-gallery">
       <img src="perspectives/images/silicon-valley-fire-1.jpg" alt="Gallery image 1">
       <img src="perspectives/images/silicon-valley-fire-3.jpg" alt="Gallery image 2">
     </section>
@@ -87,11 +87,61 @@
     const fallbackImage = 'perspectives/images/silicon-valley-fire-1.jpg';
 
     function formatDate(value) {
-      return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      return new Date(`${value}T00:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
     }
 
     function stripFrontMatter(markdown) {
       return markdown.replace(/^---[\s\S]*?---/, '').trim();
+    }
+
+    function normalizeId(value) {
+      return String(value || '').trim().toLowerCase();
+    }
+
+    async function fetchMarkdownWithFallback(markdownPath) {
+      const first = await fetch(markdownPath);
+      if (first.ok) {
+        return first.text();
+      }
+
+      const fallbackPath = markdownPath.replace(/([^/]+)$/, (fileName) => fileName.toLowerCase());
+      if (fallbackPath !== markdownPath) {
+        const second = await fetch(fallbackPath);
+        if (second.ok) {
+          return second.text();
+        }
+      }
+
+      throw new Error(`Markdown not found: ${markdownPath}`);
+    }
+
+    function renderArticleGallery(article) {
+      const galleryEl = document.getElementById('article-gallery');
+      const images = Array.isArray(article.galleryImages) && article.galleryImages.length > 0
+        ? article.galleryImages
+        : [
+            { src: 'perspectives/images/silicon-valley-fire-1.jpg', alt: 'Gallery image 1' },
+            { src: 'perspectives/images/silicon-valley-fire-3.jpg', alt: 'Gallery image 2' }
+          ];
+
+      if (images.length === 0) {
+        galleryEl.classList.add('is-hidden');
+        return;
+      }
+
+      galleryEl.classList.remove('is-hidden');
+      galleryEl.innerHTML = images.slice(0, 2).map((image) => `
+        <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || article.title)}" onerror="this.src='${fallbackImage}'">
+      `).join('');
     }
 
     async function loadArticle() {
@@ -105,10 +155,11 @@
       const relatedEl = document.getElementById('related-grid');
 
       try {
-        const metaRes = await fetch('perspectives/articles.json');
+        const metaRes = await fetch('perspectives/articles.json?v=20260727a', { cache: 'no-store' });
         const articles = await metaRes.json();
 
-        const selected = articles.find((article) => article.id === articleId) || articles[0];
+        const normalizedArticleId = normalizeId(articleId);
+        const selected = articles.find((article) => normalizeId(article.id) === normalizedArticleId) || articles[0];
         if (!selected) {
           titleEl.textContent = 'Article not found';
           subtitleEl.textContent = 'No article metadata is available.';
@@ -121,10 +172,10 @@
         imageEl.src = selected.imageUrl;
         imageEl.alt = selected.title;
         imageEl.onerror = () => { imageEl.src = fallbackImage; };
+        renderArticleGallery(selected);
 
         try {
-          const markdownRes = await fetch(selected.markdownFile);
-          const markdown = await markdownRes.text();
+          const markdown = await fetchMarkdownWithFallback(selected.markdownFile);
           const converter = new showdown.Converter({ tables: true, strikethrough: true, tasklists: true });
           contentEl.innerHTML = converter.makeHtml(stripFrontMatter(markdown));
         } catch (error) {

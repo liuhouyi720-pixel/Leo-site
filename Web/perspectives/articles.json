@@ -1,5 +1,23 @@
 [
   {
+    "id": "before-argentina-switzerland-2026",
+    "title": "Before Argentina vs. Switzerland",
+    "date": "2026-07-11",
+    "summary": "A personal World Cup journey with Messi, from the sadness of 2018 to the catharsis of Qatar and the memories that became part of who I am.",
+    "imageUrl": "perspectives/images/messi-argentina-2022-world-cup.jpg",
+    "markdownFile": "perspectives/before-argentina-switzerland-2026.md",
+    "galleryImages": [
+      {
+        "src": "perspectives/images/leo-messi-jersey-campus.jpg",
+        "alt": "Leo wearing an Argentina Messi jersey on campus"
+      },
+      {
+        "src": "perspectives/images/leo-messi-watch-party.jpg",
+        "alt": "A room of people watching Messi on a projection screen"
+      }
+    ]
+  },
+  {
     "id": "ai-non-human-consciousness",
     "title": "Artificial Intelligence and Non-Human Consciousness",
     "date": "2026-05-04",

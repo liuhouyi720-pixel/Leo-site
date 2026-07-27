@@ -151,11 +151,11 @@
     async function loadLatestPerspectives() {
       const container = document.getElementById('latest-perspectives');
       try {
-        const response = await fetch('perspectives/articles.json');
+        const response = await fetch('perspectives/articles.json?v=20260727a', { cache: 'no-store' });
         const articles = await response.json();
         const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 4);
         container.innerHTML = sorted.map((item) => {
-          const dateText = new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+          const dateText = new Date(`${item.date}T00:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
           return `
             <article class="card">
               <a href="article.html?id=${item.id}">
