@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/Web",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/Web/:path*",
+      "destination": "/:path*",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/article/:id",
+      "destination": "/article.html?id=:id"
+    }
+  ]
+}
