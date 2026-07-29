@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Article | Leo's Site</title>
-  <link rel="stylesheet" href="style.css?v=20260728a">
+  <link rel="stylesheet" href="style.css?v=20260729a">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 </head>
 <body>
@@ -26,6 +26,8 @@
       <h1 id="article-title">Article title</h1>
       <p id="article-subtitle">Subheading that sets up context and helps readers enter the story.</p>
     </section>
+
+    <nav id="article-language-switcher" class="article-language-switcher" aria-label="Article language" hidden></nav>
 
     <section class="article-lead-image">
       <img id="article-image" src="perspectives/images/silicon-valley-fire-2.jpg" alt="Article lead image">
@@ -86,8 +88,9 @@
   <script>
     const fallbackImage = 'perspectives/images/silicon-valley-fire-1.jpg';
 
-    function formatDate(value) {
-      return new Date(`${value}T00:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    function formatDate(value, language = 'en') {
+      const locale = language === 'fr' ? 'fr-FR' : 'en-US';
+      return new Date(`${value}T00:00:00`).toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
     function escapeHtml(value) {
@@ -105,6 +108,59 @@
 
     function normalizeId(value) {
       return String(value || '').trim().toLowerCase();
+    }
+
+    function resolveArticleTranslation(article, requestedLanguage) {
+      const translations = article.translations;
+      if (!translations || typeof translations !== 'object') {
+        return {
+          language: 'en',
+          label: 'English',
+          title: article.title,
+          summary: article.summary,
+          markdownFile: article.markdownFile
+        };
+      }
+
+      const availableLanguages = Object.keys(translations);
+      const fallbackLanguage = article.defaultLanguage && translations[article.defaultLanguage]
+        ? article.defaultLanguage
+        : availableLanguages[0];
+      const language = translations[requestedLanguage] ? requestedLanguage : fallbackLanguage;
+
+      return {
+        language,
+        ...translations[language]
+      };
+    }
+
+    function renderLanguageSwitcher(article, currentLanguage) {
+      const switcherEl = document.getElementById('article-language-switcher');
+      const translations = article.translations;
+
+      if (!translations || Object.keys(translations).length < 2) {
+        switcherEl.hidden = true;
+        switcherEl.innerHTML = '';
+        return;
+      }
+
+      switcherEl.hidden = false;
+      switcherEl.innerHTML = `
+        <div class="article-language-options" role="group" aria-label="Choose article language">
+          ${Object.entries(translations).map(([language, translation]) => {
+            const isActive = language === currentLanguage;
+            const href = `article.html?id=${encodeURIComponent(article.id)}&lang=${encodeURIComponent(language)}`;
+            return `
+              <a
+                class="article-language-link${isActive ? ' is-active' : ''}"
+                href="${href}"
+                lang="${escapeHtml(language)}"
+                ${isActive ? 'aria-current="page"' : ''}
+              >${escapeHtml(translation.label || language.toUpperCase())}</a>
+            `;
+          }).join('')}
+        </div>
+      `;
     }
 
     async function fetchMarkdownWithFallback(markdownPath) {
@@ -147,6 +203,7 @@
     async function loadArticle() {
       const params = new URLSearchParams(window.location.search);
       const articleId = params.get('id');
+      const requestedLanguage = normalizeId(params.get('lang'));
 
       const titleEl = document.getElementById('article-title');
       const subtitleEl = document.getElementById('article-subtitle');
@@ -155,7 +212,7 @@
       const relatedEl = document.getElementById('related-grid');
 
       try {
-        const metaRes = await fetch('perspectives/articles.json?v=20260728a', { cache: 'no-store' });
+        const metaRes = await fetch('perspectives/articles.json?v=20260729a', { cache: 'no-store' });
         const articles = await metaRes.json();
 
         const normalizedArticleId = normalizeId(articleId);
@@ -166,16 +223,19 @@
           return;
         }
 
-        document.title = `${selected.title} | Leo's Site`;
-        titleEl.textContent = selected.title;
-        subtitleEl.textContent = `${formatDate(selected.date)} - ${selected.summary}`;
+        const translation = resolveArticleTranslation(selected, requestedLanguage);
+        document.documentElement.lang = translation.language;
+        document.title = `${translation.title} | Leo's Site`;
+        titleEl.textContent = translation.title;
+        subtitleEl.textContent = `${formatDate(selected.date, translation.language)} - ${translation.summary}`;
         imageEl.src = selected.imageUrl;
-        imageEl.alt = selected.title;
+        imageEl.alt = translation.title;
         imageEl.onerror = () => { imageEl.src = fallbackImage; };
+        renderLanguageSwitcher(selected, translation.language);
         renderArticleGallery(selected);
 
         try {
-          const markdown = await fetchMarkdownWithFallback(selected.markdownFile);
+          const markdown = await fetchMarkdownWithFallback(translation.markdownFile);
           const converter = new showdown.Converter({ tables: true, strikethrough: true, tasklists: true });
           contentEl.innerHTML = converter.makeHtml(stripFrontMatter(markdown));
         } catch (error) {

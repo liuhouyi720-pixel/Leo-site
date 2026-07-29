@@ -6,6 +6,21 @@
     "summary": "On Argentina, absurdity, Cortázar and Camus - and football as a tragic tango against the void.",
     "imageUrl": "perspectives/images/argentina-england-history-lead.webp",
     "markdownFile": "perspectives/before-argentina-england-2026.md",
+    "defaultLanguage": "en",
+    "translations": {
+      "en": {
+        "label": "English",
+        "title": "Written Before Argentina vs. England",
+        "summary": "On Argentina, absurdity, Cortázar and Camus - and football as a tragic tango against the void.",
+        "markdownFile": "perspectives/before-argentina-england-2026.md"
+      },
+      "fr": {
+        "label": "Français",
+        "title": "Écrit avant Argentine-Angleterre",
+        "summary": "Sur l'Argentine, l'absurde, Cortázar et Camus - et le football comme tango tragique contre le néant.",
+        "markdownFile": "perspectives/before-argentina-england-2026-fr.md"
+      }
+    },
     "galleryImages": [
       {
         "src": "perspectives/images/argentina-england-romero.webp",
