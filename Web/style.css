@@ -780,6 +780,12 @@ img {
   border-radius: var(--radius);
 }
 
+.article-content figure.article-figure--portrait img {
+  max-height: 820px;
+  object-fit: contain;
+  background: #111;
+}
+
 .article-content figcaption {
   margin-top: 12px;
   color: #5d5d5d;

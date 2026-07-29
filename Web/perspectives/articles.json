@@ -1,5 +1,23 @@
 [
   {
+    "id": "before-argentina-england-2026",
+    "title": "Written Before Argentina vs. England",
+    "date": "2026-07-28",
+    "summary": "On Argentina, absurdity, Cortázar and Camus - and football as a tragic tango against the void.",
+    "imageUrl": "perspectives/images/argentina-england-history-lead.webp",
+    "markdownFile": "perspectives/before-argentina-england-2026.md",
+    "galleryImages": [
+      {
+        "src": "perspectives/images/argentina-england-romero.webp",
+        "alt": "Argentina defender Cristian Romero reacts during the match"
+      },
+      {
+        "src": "perspectives/images/argentina-england-lautaro-celebration.webp",
+        "alt": "Lautaro Martínez celebrates for Argentina"
+      }
+    ]
+  },
+  {
     "id": "before-argentina-switzerland-2026",
     "title": "Before Argentina vs. Switzerland",
     "date": "2026-07-11",
