@@ -145,7 +145,7 @@
       const viewMoreButton = document.getElementById('view-more-btn');
 
       try {
-        const response = await fetch('perspectives/articles.json?v=20260729a', { cache: 'no-store' });
+        const response = await fetch('perspectives/articles.json?v=20260827a', { cache: 'no-store' });
         const articles = await response.json();
         sortedArticles = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
         visibleCount = INITIAL_VISIBLE;

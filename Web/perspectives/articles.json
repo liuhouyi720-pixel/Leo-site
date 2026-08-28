@@ -1,5 +1,23 @@
 [
   {
+    "id": "from-new-york-to-champaign",
+    "title": "From New York to Champaign",
+    "date": "2026-08-27",
+    "summary": "A farewell to New York, the friends and rooms that made one generous year, and the uneasy beginning of a new life in Champaign.",
+    "imageUrl": "perspectives/images/new-york-sunset-overlook.webp",
+    "markdownFile": "perspectives/from-new-york-to-champaign.md",
+    "galleryImages": [
+      {
+        "src": "perspectives/images/new-york-coney-island-beach.webp",
+        "alt": "The beach at Coney Island under a wide blue sky"
+      },
+      {
+        "src": "perspectives/images/new-york-rainbow-skyline.webp",
+        "alt": "A rainbow descending over the Manhattan skyline"
+      }
+    ]
+  },
+  {
     "id": "before-argentina-england-2026",
     "title": "Written Before Argentina vs. England",
     "date": "2026-07-28",

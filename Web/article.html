@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Article | Leo's Site</title>
-  <link rel="stylesheet" href="style.css?v=20260729a">
+  <link rel="stylesheet" href="style.css?v=20260827a">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 </head>
 <body>
@@ -212,7 +212,7 @@
       const relatedEl = document.getElementById('related-grid');
 
       try {
-        const metaRes = await fetch('perspectives/articles.json?v=20260729a', { cache: 'no-store' });
+        const metaRes = await fetch('perspectives/articles.json?v=20260827a', { cache: 'no-store' });
         const articles = await metaRes.json();
 
         const normalizedArticleId = normalizeId(articleId);
