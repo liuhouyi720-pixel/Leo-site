@@ -1,5 +1,36 @@
 [
   {
+    "id": "the-shape-of-threat",
+    "title": "The Shape of Threat",
+    "subtitle": "Reading attacking patterns through expected threat and tactical clustering",
+    "date": "2026-09-14",
+    "tags": ["Sports Analytics", "Machine Learning", "Data Analytics"],
+    "status": "MVP / Live",
+    "featured": true,
+    "demoUrl": "https://liuhouyi720-pixel-xt-tactical-clust.vercel.app",
+    "oneLiner": "An illustrated soccer research demo that turns event data into attacking profiles, connecting spatial patterns with questions coaches can explore in match film.",
+    "cover": {
+      "src": "image/projects/the-shape-of-threat/global-xt.png",
+      "alt": "Expected threat across a 16 by 12 soccer field grid, with higher location values near the right-hand goal.",
+      "caption": "The shared xT location-value map · Original research output using StatsBomb Open Data."
+    },
+    "problem": "Teams can create similar total threat while attacking through different parts of the field. How can we make those differences visible?",
+    "approach": "Estimate a shared expected-threat map from StatsBomb Open Data, turn positive contributions from successful passes and carries into normalized team-season profiles, and group similar profiles with scaling, PCA, and k-means.",
+    "results": "The saved main analysis groups 288 eligible team profiles into five clusters. The demo explains the location-value map, creation profiles, and a second experiment combining creation and reception maps through original figures.",
+    "meaning": "Prepared for the UIUC women's soccer coaching staff, the demo connects exploratory research to tactical discussion. It uses historical men's and women's competition samples, not measurements of Illinois' own team; the groups describe spatial patterns rather than performance rankings.",
+    "metrics": [
+      {"label": "Field representation", "value": "192 zones", "note": "A shared 16 × 12 location-value grid"},
+      {"label": "Eligible sample", "value": "288 profiles", "note": "Team-seasons or tournament editions after filtering"},
+      {"label": "Main grouping", "value": "5 clusters", "note": "Exploratory groups, not preset tactical labels"}
+    ],
+    "methods": [
+      {"name": "Expected threat (xT)", "explain": "Values field locations and measures the change from the start to the end of a successful move."},
+      {"name": "Spatial profiles", "explain": "Represent each zone as a share of a team's total positive threat, focusing on where contributions occur."},
+      {"name": "PCA + K-means", "explain": "Condense the prepared zone features and group similar team profiles for interpretation on the field."}
+    ],
+    "downloads": []
+  },
+  {
     "id": "carbon-tax-rate-prediction",
     "title": "Carbon Tax Rate Prediction for China",
     "subtitle": "XGBoost with K-means similarity weighting and SHAP interpretation",

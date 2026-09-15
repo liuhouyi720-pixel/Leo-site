@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects | Leo's Site</title>
+  <meta name="description" content="Explore Leo's projects in soccer analytics, machine learning, and policy modeling. Browse live demos, research findings, and original reports.">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="projects.css">
 </head>
-<body>
+<body class="projects-page">
   <header class="site-header">
     <div class="container">
       <a class="brand" href="index.html">Leo's Site</a>
       <nav class="nav-links">
         <a href="who-am-i.html">About</a>
         <a href="my-experience.html">Experience</a>
-        <a href="projects.html">Projects</a>
+        <a href="projects.html" aria-current="page">Projects</a>
         <a href="perspectives.html">Perspectives</a>
         <a href="Resume Houyi LIU.pdf" target="_blank" rel="noopener" class="nav-btn">Resume</a>
       </nav>
@@ -21,40 +23,22 @@
   </header>
 
   <main class="container page-main projects-main">
-    <section class="section projects-hero reveal-on-scroll" style="margin-top:40px;">
-      <p class="projects-eyebrow">Projects Hub</p>
-      <h1 class="page-title">Projects</h1>
-      <p class="page-subtitle">A category-agnostic project system with reusable cards, teaching-style explanations, and source-linked artifacts.</p>
+    <section class="projects-intro" aria-labelledby="projects-title">
+      <p class="projects-eyebrow">Selected work</p>
+      <h1 class="page-title" id="projects-title">Projects</h1>
+      <p class="page-subtitle">Turning data into a clearer view of the game, the economy, and everyday decisions.</p>
     </section>
 
-    <section class="section projects-filter reveal-on-scroll">
-      <div class="section-head">
-        <h2>Filter by Tag</h2>
-        <p>Use tags to quickly switch across methods, topics, and future non-ML projects.</p>
+    <section class="projects-library" aria-labelledby="library-title">
+      <div class="projects-toolbar">
+        <h2 id="library-title">Explore the work</h2>
+        <p id="project-count" role="status" aria-live="polite">Loading projects…</p>
       </div>
-      <div id="tag-filter" class="tag-filter" aria-label="Project tag filters"></div>
-    </section>
-
-    <section id="featured-cluster-section" class="section reveal-on-scroll">
-      <div class="section-head">
-        <h2 id="featured-cluster-title">Featured Cluster</h2>
-        <p id="featured-cluster-subtitle">Current spotlight for deep-dive project storytelling.</p>
+      <div id="tag-filter" class="tag-filter" role="group" aria-label="Filter projects by topic"></div>
+      <div id="all-projects-grid" class="projects-grid">
+        <p class="empty-state">Loading projects…</p>
       </div>
-      <div id="featured-cluster-grid" class="project-stack"></div>
-    </section>
-
-    <section class="section reveal-on-scroll">
-      <div class="section-head">
-        <h2>All Projects</h2>
-        <p>Compact stream for scanning every project entry from the same data source.</p>
-      </div>
-      <div id="all-projects-grid" class="registry-grid"></div>
-    </section>
-
-    <section class="section reflection-block reveal-on-scroll">
-      <h2>Cross-Project Reflection</h2>
-      <p id="reflection-summary" class="reflection-summary">Reflection will appear after project data is loaded.</p>
-      <div id="reflection-points" class="reflection-points"></div>
+      <noscript><p>Enable JavaScript to browse the project collection. You can also <a href="https://liuhouyi720-pixel-xt-tactical-clust.vercel.app" target="_blank" rel="noopener noreferrer">read The Shape of Threat demo ↗</a>.</p></noscript>
     </section>
   </main>
 
