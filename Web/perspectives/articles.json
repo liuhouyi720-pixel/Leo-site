@@ -1,5 +1,17 @@
 [
   {
+    "id": "wuxia-in-the-twenty-first-century",
+    "title": "Wuxia in the Twenty-First Century",
+    "date": "2026-11-24",
+    "summary": "Jensen Huang's return to NVIDIA, seen through Jin Yong's martial arts fiction, and what it means to feel irreplaceable in the age of AI.",
+    "imageUrl": "perspectives/images/jensen-huang-nvidia-return.webp",
+    "imageAlt": "Jensen Huang holds a hand to his chest as people applaud at NVIDIA headquarters",
+    "imageCaption": "Jensen Huang back at NVIDIA headquarters, November 23, 2026.",
+    "imageOrientation": "portrait",
+    "markdownFile": "perspectives/wuxia-in-the-twenty-first-century.md",
+    "galleryImages": []
+  },
+  {
     "id": "from-new-york-to-champaign",
     "title": "From New York to Champaign",
     "date": "2026-08-27",

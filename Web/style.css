@@ -763,11 +763,29 @@ img {
 }
 
 .article-lead-image {
-  margin-top: 40px;
+  margin: 40px 0 0;
 }
 
 .article-lead-image img {
   height: 650px;
+}
+
+.article-lead-image--portrait {
+  width: min(100%, 500px);
+  margin-inline: auto;
+}
+
+.article-lead-image--portrait img {
+  display: block;
+  height: auto;
+  aspect-ratio: 3 / 4;
+}
+
+.article-lead-image figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 .article-content {

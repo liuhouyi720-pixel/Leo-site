@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Article | Leo's Site</title>
-  <link rel="stylesheet" href="style.css?v=20260827a">
+  <link rel="stylesheet" href="style.css?v=20261124a">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 </head>
 <body>
@@ -29,16 +29,14 @@
 
     <nav id="article-language-switcher" class="article-language-switcher" aria-label="Article language" hidden></nav>
 
-    <section class="article-lead-image">
+    <figure class="article-lead-image">
       <img id="article-image" src="perspectives/images/silicon-valley-fire-2.jpg" alt="Article lead image">
-    </section>
+      <figcaption id="article-image-caption" hidden></figcaption>
+    </figure>
 
     <section id="article-content" class="article-content"></section>
 
-    <section id="article-gallery" class="duo section article-gallery">
-      <img src="perspectives/images/silicon-valley-fire-1.jpg" alt="Gallery image 1">
-      <img src="perspectives/images/silicon-valley-fire-3.jpg" alt="Gallery image 2">
-    </section>
+    <section id="article-gallery" class="duo section article-gallery is-hidden"></section>
 
     <section class="section">
       <h2 style="font-size:40px;">Related articles or posts</h2>
@@ -182,7 +180,7 @@
 
     function renderArticleGallery(article) {
       const galleryEl = document.getElementById('article-gallery');
-      const images = Array.isArray(article.galleryImages) && article.galleryImages.length > 0
+      const images = Array.isArray(article.galleryImages)
         ? article.galleryImages
         : [
             { src: 'perspectives/images/silicon-valley-fire-1.jpg', alt: 'Gallery image 1' },
@@ -191,6 +189,7 @@
 
       if (images.length === 0) {
         galleryEl.classList.add('is-hidden');
+        galleryEl.replaceChildren();
         return;
       }
 
@@ -208,11 +207,12 @@
       const titleEl = document.getElementById('article-title');
       const subtitleEl = document.getElementById('article-subtitle');
       const imageEl = document.getElementById('article-image');
+      const imageCaptionEl = document.getElementById('article-image-caption');
       const contentEl = document.getElementById('article-content');
       const relatedEl = document.getElementById('related-grid');
 
       try {
-        const metaRes = await fetch('perspectives/articles.json?v=20260827a', { cache: 'no-store' });
+        const metaRes = await fetch('perspectives/articles.json?v=20261124a', { cache: 'no-store' });
         const articles = await metaRes.json();
 
         const normalizedArticleId = normalizeId(articleId);
@@ -229,7 +229,10 @@
         titleEl.textContent = translation.title;
         subtitleEl.textContent = `${formatDate(selected.date, translation.language)} - ${translation.summary}`;
         imageEl.src = selected.imageUrl;
-        imageEl.alt = translation.title;
+        imageEl.alt = selected.imageAlt || translation.title;
+        imageEl.parentElement.classList.toggle('article-lead-image--portrait', selected.imageOrientation === 'portrait');
+        imageCaptionEl.textContent = selected.imageCaption || '';
+        imageCaptionEl.hidden = !selected.imageCaption;
         imageEl.onerror = () => { imageEl.src = fallbackImage; };
         renderLanguageSwitcher(selected, translation.language);
         renderArticleGallery(selected);
